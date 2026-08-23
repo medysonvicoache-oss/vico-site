@@ -9,7 +9,7 @@
 body{background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif}
 header{height:70px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;background:rgba(5,5,5,.97);z-index:20}
 .logo{font-size:28px;font-weight:800;letter-spacing:-1px}
-nav{display:flex;gap:35px}nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}nav a:hover{color:#fff}
+nav{display:flex;gap:35px}nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}nav a:hover{color:#fff}.header-cart{background:none;border:0;color:#aaa;cursor:pointer;font-size:10px;letter-spacing:1px}.header-cart:hover{color:#fff}
 .hero{padding:45px 6% 35px}.hero p{color:#999;font-size:12px;line-height:1.5;text-transform:uppercase;letter-spacing:1px;max-width:320px}
 .filters{display:flex;justify-content:flex-end;gap:30px;padding:0 6% 30px;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:1px}
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:0 6% 80px}
@@ -30,10 +30,158 @@ nav{display:flex;gap:35px}nav a{color:#aaa;text-decoration:none;font-size:11px;l
 .view-buttons button:hover,.view-buttons button.active{background:#fff;color:#000;border-color:#fff}
 footer{border-top:1px solid #202020;padding:35px 6%;color:#666;font-size:10px;letter-spacing:1px}
 @media(max-width:800px){header{padding:0 20px}nav{gap:15px}nav a{font-size:9px}.hero{padding:35px 20px}.filters{padding:0 20px 20px;justify-content:flex-start;gap:15px;flex-wrap:wrap}.products{grid-template-columns:1fr;padding:0 20px 50px}.product-modal{padding:10px}.product-modal-content{width:96%;max-height:95vh;overflow-y:auto;display:flex;flex-direction:column;gap:20px;padding:20px}.product-gallery{min-height:400px}.product-gallery img{max-height:55vh}.product-details{padding-bottom:15px}}
+
+.option-label{
+    color:#777;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:30px;
+    margin-bottom:12px;
+}
+.size-buttons{
+    display:flex;
+    gap:8px;
+}
+.size-buttons button{
+    width:48px;
+    height:42px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #444;
+    cursor:pointer;
+    font-size:10px;
+    letter-spacing:1px;
+}
+.size-buttons button:hover,
+.size-buttons button.active{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+}
+.quantity{
+    display:flex;
+    align-items:center;
+    width:140px;
+    height:42px;
+    border:1px solid #444;
+}
+.quantity button{
+    width:42px;
+    height:100%;
+    border:0;
+    background:transparent;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
+.quantity button:hover{
+    background:#fff;
+    color:#000;
+}
+.quantity span{
+    flex:1;
+    text-align:center;
+    font-size:12px;
+}
+.purchase-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    margin-top:28px;
+}
+.purchase-buttons button{
+    width:100%;
+    min-height:50px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+}
+.add-cart{
+    background:transparent;
+    color:#fff;
+    border:1px solid #555;
+}
+.add-cart:hover{
+    border-color:#fff;
+}
+.buy-now{
+    background:#fff;
+    color:#000;
+    border:1px solid #fff;
+}
+.buy-now:hover{
+    background:#ddd;
+}
+.cart-message{
+    min-height:18px;
+    margin-top:12px;
+    color:#aaa;
+    font-size:10px;
+    letter-spacing:.5px;
+}
+.cart-panel{
+    position:fixed;
+    top:0;
+    right:0;
+    width:min(430px,100%);
+    height:100vh;
+    background:#090909;
+    border-left:1px solid #252525;
+    z-index:10000;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    padding:28px;
+    overflow-y:auto;
+}
+.cart-panel.active{transform:translateX(0)}
+.cart-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:20px;
+    border-bottom:1px solid #222;
+}
+.cart-head h3{font-size:12px;letter-spacing:2px}
+.cart-close{background:none;border:0;color:#fff;font-size:27px;cursor:pointer}
+.cart-items{padding:20px 0}
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:16px 0;
+    border-bottom:1px solid #222;
+}
+.cart-item-name{font-size:11px;font-weight:bold;letter-spacing:.5px}
+.cart-item-meta{color:#777;font-size:9px;margin-top:7px;line-height:1.5}
+.cart-item-remove{background:none;border:0;color:#777;cursor:pointer;font-size:10px}
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    font-weight:bold;
+    padding:20px 0;
+}
+.cart-checkout{
+    width:100%;
+    height:52px;
+    border:0;
+    background:#fff;
+    color:#000;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    cursor:pointer;
+}
+.cart-empty{color:#777;font-size:11px;padding:30px 0}
+@media(max-width:800px){
+    .purchase-buttons{margin-top:24px}
+}
+
 </style>
 </head>
 <body>
-<header><div class="logo">VICO</div><nav><a href="#">HOME</a><a href="#shop">SHOP</a><a href="#">COLEÇÃO</a><a href="#">SOBRE</a></nav></header>
+<header><div class="logo">VICO</div><nav><a href="#">HOME</a><a href="#shop">SHOP</a><a href="#">COLEÇÃO</a><a href="#">SOBRE</a></nav><button class="header-cart" onclick="openCart()">CARRINHO (<span id="cartCount">0</span>)</button></header>
 
 <section class="hero"><p>Peças feitas para quem não tem medo de enxergar além do óbvio.</p></section>
 
@@ -56,10 +204,48 @@ footer{border-top:1px solid #202020;padding:35px 6%;color:#666;font-size:10px;le
 <button class="close-modal" onclick="closeProduct()">×</button>
 <div class="product-gallery"><img id="productMainImage" src="" alt="Produto"></div>
 <div class="product-details">
-<h2 id="productTitle">PRODUTO</h2><div class="price" id="productPrice">R$ 129,00</div>
+<h2 id="productTitle">PRODUTO</h2>
+<div class="price" id="productPrice">R$ 129,00</div>
+
 <div class="view-title">VISUALIZAR</div>
-<div class="view-buttons"><button id="frontButton" class="active" onclick="showSide('front')">FRENTE</button><button id="backButton" onclick="showSide('back')">VERSO</button></div>
+<div class="view-buttons">
+<button id="frontButton" class="active" onclick="showSide('front')">FRENTE</button>
+<button id="backButton" onclick="showSide('back')">VERSO</button>
+</div>
+
+<div class="option-label">TAMANHO</div>
+<div class="size-buttons">
+<button onclick="selectSize(this)">P</button>
+<button class="active" onclick="selectSize(this)">M</button>
+<button onclick="selectSize(this)">G</button>
+<button onclick="selectSize(this)">GG</button>
+</div>
+
+<div class="option-label">QUANTIDADE</div>
+<div class="quantity">
+<button onclick="changeQuantity(-1)">−</button>
+<span id="quantityValue">1</span>
+<button onclick="changeQuantity(1)">+</button>
+</div>
+
+<div class="purchase-buttons">
+<button class="add-cart" onclick="addToCart()">ADICIONAR AO CARRINHO</button>
+<button class="buy-now" onclick="buyNow()">COMPRAR AGORA</button>
+</div>
+
+<div id="cartMessage" class="cart-message"></div>
 </div></div></div>
+
+
+<div id="cartPanel" class="cart-panel">
+<div class="cart-head">
+<h3>SEU CARRINHO</h3>
+<button class="cart-close" onclick="closeCart()">×</button>
+</div>
+<div id="cartItems" class="cart-items"></div>
+<div class="cart-total"><span>TOTAL</span><span id="cartTotal">R$ 0,00</span></div>
+<button class="cart-checkout" onclick="checkout()">FINALIZAR COMPRA</button>
+</div>
 
 <footer>© 2026 VICO — TODOS OS DIREITOS RESERVADOS.</footer>
 
@@ -88,6 +274,110 @@ else{image.src=currentProduct.back;back.classList.add("active");front.classList.
 function closeProduct(){document.getElementById("productModal").classList.remove("active");document.body.style.overflow=""}
 function closeOutside(e){if(e.target.id==="productModal")closeProduct()}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeProduct()});
+
+let selectedSize = "M";
+let quantity = 1;
+let cart = [];
+
+function selectSize(button){
+    document.querySelectorAll(".size-buttons button").forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+    selectedSize = button.textContent.trim();
+}
+
+function changeQuantity(amount){
+    quantity = Math.max(1, quantity + amount);
+    document.getElementById("quantityValue").textContent = quantity;
+}
+
+function addToCart(){
+    if(!currentProduct)return;
+
+    const existing = cart.find(item =>
+        item.title === currentProduct.title && item.size === selectedSize
+    );
+
+    if(existing){
+        existing.quantity += quantity;
+    }else{
+        cart.push({
+            title: currentProduct.title,
+            price: 129,
+            size: selectedSize,
+            quantity: quantity
+        });
+    }
+
+    updateCart();
+    document.getElementById("cartMessage").textContent = "ADICIONADO AO CARRINHO ✓";
+    setTimeout(()=>document.getElementById("cartMessage").textContent="",2000);
+}
+
+function buyNow(){
+    addToCart();
+    closeProduct();
+    openCart();
+}
+
+function updateCart(){
+    const container = document.getElementById("cartItems");
+    const count = cart.reduce((sum,item)=>sum + item.quantity,0);
+    document.getElementById("cartCount").textContent = count;
+
+    if(cart.length === 0){
+        container.innerHTML = '<div class="cart-empty">Seu carrinho está vazio.</div>';
+    }else{
+        container.innerHTML = cart.map((item,index)=>`
+            <div class="cart-item">
+                <div>
+                    <div class="cart-item-name">${item.title}</div>
+                    <div class="cart-item-meta">Tamanho: ${item.size}<br>Quantidade: ${item.quantity}<br>R$ ${(item.price * item.quantity).toFixed(2).replace(".",",")}</div>
+                </div>
+                <button class="cart-item-remove" onclick="removeFromCart(${index})">REMOVER</button>
+            </div>
+        `).join("");
+    }
+
+    const total = cart.reduce((sum,item)=>sum + item.price * item.quantity,0);
+    document.getElementById("cartTotal").textContent =
+        "R$ " + total.toFixed(2).replace(".",",");
+}
+
+function removeFromCart(index){
+    cart.splice(index,1);
+    updateCart();
+}
+
+function openCart(){
+    updateCart();
+    document.getElementById("cartPanel").classList.add("active");
+}
+
+function closeCart(){
+    document.getElementById("cartPanel").classList.remove("active");
+}
+
+function checkout(){
+    if(cart.length === 0){
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+    alert("Checkout será configurado na próxima etapa.");
+}
+
+const oldOpenProduct = openProduct;
+openProduct = function(name){
+    oldOpenProduct(name);
+    quantity = 1;
+    selectedSize = "M";
+    document.getElementById("quantityValue").textContent = "1";
+    document.querySelectorAll(".size-buttons button").forEach(b=>{
+        b.classList.toggle("active", b.textContent.trim()==="M");
+    });
+    document.getElementById("cartMessage").textContent = "";
+}
+updateCart();
+
 </script>
 </body>
 </html>
