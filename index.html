@@ -520,7 +520,315 @@
             }
         }
 
-    </style>
+    
+/* ================= PRODUCT PAGE ================= */
+
+.product-page,
+.cart-page {
+    position: fixed;
+    inset: 0;
+    background: #070707;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: .35s ease;
+    overflow-y: auto;
+}
+
+.product-page.open,
+.cart-page.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.close-product {
+    position: fixed;
+    top: 25px;
+    right: 35px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #333;
+    background: #0c0c0c;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.product-page-content {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 70px;
+    padding: 100px 7%;
+    align-items: center;
+}
+
+.product-page-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #111;
+    overflow: hidden;
+}
+
+.product-page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-page-info {
+    max-width: 500px;
+}
+
+.product-page-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.product-page-info h1,
+.cart-content h1 {
+    font-size: clamp(35px, 5vw, 65px);
+    line-height: .9;
+    letter-spacing: -3px;
+    margin-bottom: 25px;
+}
+
+.product-page-price {
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.product-page-description {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.7;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 25px 0;
+    margin-bottom: 30px;
+}
+
+.product-option {
+    margin-bottom: 28px;
+}
+
+.product-option > span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 13px;
+    color: #888;
+}
+
+.sizes {
+    display: flex;
+    gap: 8px;
+}
+
+.size-button {
+    width: 55px;
+    height: 50px;
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.size-button:hover,
+.size-button.selected {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    width: 145px;
+    height: 50px;
+    border: 1px solid #333;
+}
+
+.quantity button {
+    width: 45px;
+    height: 100%;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.quantity span {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+}
+
+.add-cart {
+    width: 100%;
+    height: 58px;
+    background: white;
+    color: black;
+    border: none;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.add-cart:hover {
+    background: #ddd;
+}
+
+.back-shop {
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    background: transparent;
+    color: #777;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.back-shop:hover {
+    color: white;
+}
+
+/* ================= CART ================= */
+
+.cart-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 110px 30px 70px;
+}
+
+.cart-content h1 {
+    margin-bottom: 45px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 20px 0;
+    border-top: 1px solid #222;
+}
+
+.cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    background: #111;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+}
+
+.cart-item-info strong {
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+
+.cart-item-info span {
+    color: #777;
+    font-size: 11px;
+}
+
+.remove-cart {
+    background: transparent;
+    border: none;
+    color: #777;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.remove-cart:hover {
+    color: white;
+}
+
+.empty-cart {
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 40px 0;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #222;
+    margin-top: 35px;
+    padding: 25px 0;
+}
+
+.cart-summary span {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.cart-summary strong {
+    font-size: 18px;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .product-page-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 80px 20px 40px;
+        align-items: start;
+    }
+
+    .product-page-image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .product-page-info h1,
+    .cart-content h1 {
+        font-size: 42px;
+    }
+
+    .close-product {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .cart-content {
+        padding: 85px 20px 50px;
+    }
+
+    .cart-item {
+        gap: 15px;
+    }
+
+    .cart-item img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+</style>
 </head>
 
 
@@ -562,7 +870,7 @@
             ⌕
         </button>
 
-        <button class="icon-button cart">
+        <button class="icon-button cart" onclick="openCart()">
 
             🛒
 
@@ -896,30 +1204,304 @@
 
 
 <script>
+let currentProduct = null;
+let selectedSize = null;
+let quantity = 1;
 
-    function openProduct() {
+const products = {
+    truth: {
+        name: "THE TRUTH HURTS TEE",
+        price: 129,
+        image: "the-truth-hurts.png",
+        description: "The truth hurts, but lies destroy."
+    },
+    kyan: {
+        name: "KYAN TEE",
+        price: 129,
+        image: "kyan.png",
+        description: "Peça exclusiva VICO.ARCH."
+    }
+};
 
-        alert(
-            "THE TRUTH HURTS TEE\n\n" +
-            "R$ 129,00\n\n" +
-            "A página do produto será adicionada na próxima etapa."
-        );
+let cart = [];
 
+function openProduct() {
+    currentProduct = products.truth;
+    showProduct();
+}
+
+function openKyan() {
+    currentProduct = products.kyan;
+    showProduct();
+}
+
+function showProduct() {
+    selectedSize = null;
+    quantity = 1;
+
+    document.getElementById("productPage").classList.add("open");
+    document.getElementById("productPageImage").src = currentProduct.image;
+    document.getElementById("productPageName").textContent = currentProduct.name;
+    document.getElementById("productPagePrice").textContent =
+        "R$ " + currentProduct.price.toFixed(2).replace(".", ",");
+    document.getElementById("productPageDescription").textContent =
+        currentProduct.description;
+    document.getElementById("quantity").textContent = quantity;
+
+    document.querySelectorAll(".size-button").forEach(button => {
+        button.classList.remove("selected");
+    });
+}
+
+function closeProduct() {
+    document.getElementById("productPage").classList.remove("open");
+}
+
+function selectSize(size, button) {
+    selectedSize = size;
+
+    document.querySelectorAll(".size-button").forEach(b => {
+        b.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+}
+
+function changeQuantity(value) {
+    quantity += value;
+
+    if (quantity < 1) quantity = 1;
+
+    document.getElementById("quantity").textContent = quantity;
+}
+
+function addToCart() {
+    if (!selectedSize) {
+        alert("Selecione um tamanho.");
+        return;
     }
 
+    const existing = cart.find(item =>
+        item.name === currentProduct.name &&
+        item.size === selectedSize
+    );
 
-    function openKyan() {
-
-        alert(
-            "KYAN TEE\n\n" +
-            "R$ 129,00\n\n" +
-            "A página do produto será adicionada na próxima etapa."
-        );
-
+    if (existing) {
+        existing.quantity += quantity;
+    } else {
+        cart.push({
+            name: currentProduct.name,
+            price: currentProduct.price,
+            image: currentProduct.image,
+            size: selectedSize,
+            quantity: quantity
+        });
     }
 
+    updateCart();
+
+    closeProduct();
+
+    alert("Produto adicionado ao carrinho.");
+}
+
+function updateCart() {
+    const totalItems = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+    document.querySelector(".cart-number").textContent = totalItems;
+}
+
+function openCart() {
+    const cartPage = document.getElementById("cartPage");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartItems.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                SEU CARRINHO ESTÁ VAZIO.
+            </div>
+        `;
+
+        cartTotal.textContent = "R$ 0,00";
+        cartPage.classList.add("open");
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <img src="${item.image}" alt="${item.name}">
+
+                <div class="cart-item-info">
+                    <strong>${item.name}</strong>
+                    <span>Tamanho: ${item.size}</span>
+                    <span>Quantidade: ${item.quantity}</span>
+                    <span>R$ ${(item.price * item.quantity)
+                        .toFixed(2)
+                        .replace(".", ",")}</span>
+                </div>
+
+                <button
+                    class="remove-cart"
+                    onclick="removeFromCart(${index})"
+                >
+                    ×
+                </button>
+
+            </div>
+        `;
+    });
+
+    cartTotal.textContent =
+        "R$ " + total.toFixed(2).replace(".", ",");
+
+    cartPage.classList.add("open");
+}
+
+function closeCart() {
+    document.getElementById("cartPage").classList.remove("open");
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+    openCart();
+}
 </script>
 
+
+
+<!-- ================= PRODUCT PAGE ================= -->
+
+<div id="productPage" class="product-page">
+
+    <button class="close-product" onclick="closeProduct()">×</button>
+
+    <div class="product-page-content">
+
+        <div class="product-page-image">
+            <img id="productPageImage" src="" alt="">
+        </div>
+
+        <div class="product-page-info">
+
+            <div class="product-page-tag">
+                VICO.ARCH
+            </div>
+
+            <h1 id="productPageName">
+                THE TRUTH HURTS TEE
+            </h1>
+
+            <div id="productPagePrice" class="product-page-price">
+                R$ 129,00
+            </div>
+
+            <p id="productPageDescription" class="product-page-description">
+                The truth hurts, but lies destroy.
+            </p>
+
+            <div class="product-option">
+
+                <span>TAMANHO</span>
+
+                <div class="sizes">
+
+                    <button class="size-button"
+                        onclick="selectSize('P', this)">P</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('M', this)">M</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('G', this)">G</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('GG', this)">GG</button>
+
+                </div>
+
+            </div>
+
+            <div class="product-option">
+
+                <span>QUANTIDADE</span>
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity(-1)">−</button>
+
+                    <span id="quantity">1</span>
+
+                    <button onclick="changeQuantity(1)">+</button>
+
+                </div>
+
+            </div>
+
+            <button class="add-cart" onclick="addToCart()">
+                ADICIONAR AO CARRINHO
+            </button>
+
+            <button class="back-shop" onclick="closeProduct()">
+                ← VOLTAR PARA A LOJA
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div id="cartPage" class="cart-page">
+
+    <button class="close-product" onclick="closeCart()">×</button>
+
+    <div class="cart-content">
+
+        <div class="product-page-tag">
+            VICO.ARCH
+        </div>
+
+        <h1>SEU CARRINHO</h1>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-summary">
+
+            <span>TOTAL</span>
+
+            <strong id="cartTotal">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+        <button class="add-cart" onclick="alert('Checkout será adicionado na próxima etapa.')">
+            FINALIZAR COMPRA
+        </button>
+
+        <button class="back-shop" onclick="closeCart()">
+            ← CONTINUAR COMPRANDO
+        </button>
+
+    </div>
+
+</div>
 
 </body>
 
