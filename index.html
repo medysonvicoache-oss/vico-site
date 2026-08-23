@@ -1,38 +1,924 @@
-<!-- KYAN -->
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<article class="product">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="product-image">
+    <title>VICO — Shop</title>
 
-        <span class="tag">
-            NOVO
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #070707;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 74px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 55px;
+
+            background: rgba(7, 7, 7, 0.88);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid #1d1d1d;
+
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 29px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 42px;
+
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: #aaa;
+            transition: .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .icon-button {
+            border: none;
+            background: none;
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .cart {
+            position: relative;
+        }
+
+        .cart-number {
+            position: absolute;
+
+            top: -8px;
+            right: -9px;
+
+            width: 16px;
+            height: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: white;
+            color: black;
+
+            border-radius: 50%;
+
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+
+        /* ================= SHOP ================= */
+
+        main {
+            padding-top: 74px;
+        }
+
+        .shop-header {
+            padding: 90px 6% 45px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .shop-title {
+            font-size: clamp(65px, 8vw, 110px);
+
+            font-weight: 900;
+
+            letter-spacing: -6px;
+
+            line-height: .8;
+        }
+
+        .shop-description {
+            margin-top: 25px;
+
+            max-width: 310px;
+
+            font-size: 12px;
+            line-height: 1.6;
+
+            color: #888;
+
+            letter-spacing: .5px;
+        }
+
+        .shop-options {
+            display: flex;
+            gap: 35px;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+        .shop-option {
+            color: #aaa;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid transparent;
+
+            padding-bottom: 6px;
+        }
+
+        .shop-option:hover {
+            color: white;
+            border-color: white;
+        }
+
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            padding: 0 5.5% 90px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .product {
+            background: #0c0c0c;
+
+            border: 1px solid #202020;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .product:hover {
+            border-color: #3a3a3a;
+            transform: translateY(-3px);
+        }
+
+        .product-image {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 1.35;
+
+            background: #111;
+
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform .6s ease;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.025);
+        }
+
+        .tag {
+            position: absolute;
+
+            top: 18px;
+            left: 18px;
+
+            padding: 8px 11px;
+
+            border: 1px solid white;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            font-weight: bold;
+
+            z-index: 2;
+        }
+
+        .product-info {
+            min-height: 95px;
+
+            padding: 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: .7px;
+        }
+
+        .product-price {
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            color: #999;
+        }
+
+        .product-arrow {
+            font-size: 27px;
+
+            font-weight: 200;
+
+            transition: .3s;
+        }
+
+        .product:hover .product-arrow {
+            transform: translateX(7px);
+        }
+
+
+        /* ================= INFORMATION ================= */
+
+        .information {
+            border-top: 1px solid #222;
+
+            border-bottom: 1px solid #222;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            padding: 42px 5.5%;
+        }
+
+        .info {
+            padding: 0 30px;
+
+            border-right: 1px solid #252525;
+        }
+
+        .info:first-child {
+            padding-left: 0;
+        }
+
+        .info:last-child {
+            border-right: none;
+        }
+
+        .info-icon {
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        .info-title {
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+        .info-text {
+            color: #666;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 70px 5.5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 70px;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+
+            font-weight: 900;
+
+            letter-spacing: -2px;
+        }
+
+        .footer-description {
+            color: #666;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            max-width: 270px;
+
+            margin-top: 15px;
+        }
+
+        .footer-column h3 {
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 20px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: #666;
+
+            font-size: 11px;
+
+            margin-bottom: 13px;
+
+            transition: .2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #222;
+
+            padding-top: 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #444;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                height: 64px;
+
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            main {
+                padding-top: 64px;
+            }
+
+            .shop-header {
+                padding: 65px 20px 35px;
+
+                display: block;
+            }
+
+            .shop-title {
+                font-size: 70px;
+
+                letter-spacing: -5px;
+            }
+
+            .shop-description {
+                margin-top: 22px;
+            }
+
+            .shop-options {
+                margin-top: 30px;
+
+                gap: 22px;
+            }
+
+            .products {
+                padding: 0 15px 60px;
+
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+            .product-image {
+                aspect-ratio: 1.15;
+            }
+
+            .product-info {
+                padding: 18px;
+            }
+
+            .information {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 30px;
+
+                padding: 35px 20px;
+            }
+
+            .info {
+                padding: 0;
+
+                border: none;
+            }
+
+            footer {
+                padding: 50px 20px 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .copyright {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <a href="index.html" class="logo">
+        VICO
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            HOME
+        </a>
+
+        <a href="#" class="active">
+            SHOP
+        </a>
+
+        <a href="#">
+            COLEÇÃO
+        </a>
+
+        <a href="#">
+            SOBRE
+        </a>
+
+    </nav>
+
+
+    <div class="header-icons">
+
+        <button class="icon-button">
+            ⌕
+        </button>
+
+        <button class="icon-button cart">
+
+            🛒
+
+            <span class="cart-number">
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- ================= SHOP HEADER ================= -->
+
+<section class="shop-header">
+
+    <div>
+
+        <h1 class="shop-title">
+            SHOP
+        </h1>
+
+        <p class="shop-description">
+            PEÇAS FEITAS PARA QUEM
+            NÃO TEM MEDO DE ENXERGAR
+            ALÉM DO ÓBVIO.
+        </p>
+
+    </div>
+
+
+    <div class="shop-options">
+
+        <span class="shop-option">
+            FILTRAR ↓
         </span>
 
-        <img
-            src="assets/kyan.png"
-            alt="Kyan Tee"
+        <span class="shop-option">
+            ORDENAR: MAIS RECENTES ↓
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products">
+
+
+    <!-- THE TRUTH HURTS -->
+
+    <article class="product" onclick="openProduct()">
+
+        <div class="product-image">
+
+            <span class="tag">
+                NOVO
+            </span>
+
+            <img
+                src="assets/the-truth-hurts.png"
+                alt="The Truth Hurts Tee"
+            >
+
+        </div>
+
+
+        <div class="product-info">
+
+            <div>
+
+                <div class="product-name">
+                    THE TRUTH HURTS TEE
+                </div>
+
+                <div class="product-price">
+                    R$ 129,00
+                </div>
+
+            </div>
+
+
+            <div class="product-arrow">
+                →
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- FUTURO PRODUTO -->
+
+    <article class="product">
+
+        <div
+            class="product-image"
+            style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#0b0b0b;
+            "
         >
 
-    </div>
-
-    <div class="product-info">
-
-        <div>
-
-            <div class="product-name">
-                KYAN TEE
-            </div>
-
-            <div class="product-price">
-                R$ 129,00
+            <div
+                style="
+                    color:#333;
+                    font-size:12px;
+                    letter-spacing:2px;
+                "
+            >
+                NEXT DROP
             </div>
 
         </div>
 
-        <div class="product-arrow">
-            →
+
+        <div class="product-info">
+
+            <div>
+
+                <div class="product-name">
+                    EM BREVE
+                </div>
+
+                <div class="product-price">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="product-arrow">
+                →
+            </div>
+
+        </div>
+
+    </article>
+
+
+</section>
+
+
+
+<!-- ================= INFORMATION ================= -->
+
+<section class="information">
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            ◇
+        </div>
+
+        <div class="info-title">
+            ENVIO PARA TODO O BRASIL
+        </div>
+
+        <div class="info-text">
+            Receba sua peça onde estiver.
         </div>
 
     </div>
 
-</article>
+
+    <div class="info">
+
+        <div class="info-icon">
+            ♢
+        </div>
+
+        <div class="info-title">
+            PAGAMENTO SEGURO
+        </div>
+
+        <div class="info-text">
+            Compra segura e protegida.
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            □
+        </div>
+
+        <div class="info-title">
+            TROCAS E DEVOLUÇÕES
+        </div>
+
+        <div class="info-text">
+            Facilidade caso precise trocar.
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            ☆
+        </div>
+
+        <div class="info-title">
+            PRODUÇÃO LIMITADA
+        </div>
+
+        <div class="info-text">
+            Peças produzidas em quantidade limitada.
+        </div>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                VICO
+            </div>
+
+            <p class="footer-description">
+                VICO.ARCH — peças para quem
+                escreve a própria história.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SHOP
+            </h3>
+
+            <a href="#">
+                CAMISETAS
+            </a>
+
+            <a href="#">
+                COLEÇÕES
+            </a>
+
+            <a href="#">
+                NOVOS DROPS
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SUPORTE
+            </h3>
+
+            <a href="#">
+                CONTATO
+            </a>
+
+            <a href="#">
+                TROCAS
+            </a>
+
+            <a href="#">
+                ENVIO
+            </a>
+
+            <a href="#">
+                FAQ
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SOCIAL
+            </h3>
+
+            <a href="#">
+                INSTAGRAM
+            </a>
+
+            <a href="#">
+                TIKTOK
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        <span>
+            © 2026 VICO.ARCH
+        </span>
+
+        <span>
+            ALL RIGHTS RESERVED.
+        </span>
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+    function openProduct() {
+
+        alert(
+            "THE TRUTH HURTS TEE\n\n" +
+            "R$ 129,00\n\n" +
+            "A página do produto será adicionada na próxima etapa."
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
