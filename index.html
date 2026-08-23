@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>VICO — Shop</title>
 
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
 
         body {
             background: #050505;
@@ -19,286 +28,414 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* ================= HEADER ================= */
+
+        /* =========================
+           HEADER
+        ========================= */
 
         header {
             height: 70px;
             border-bottom: 1px solid #202020;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 5%;
-            position: sticky;
-            top: 0;
-            background: rgba(5,5,5,.96);
-            z-index: 10;
         }
+
 
         .logo {
             font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -2px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
+
 
         nav {
             display: flex;
             gap: 35px;
         }
 
+
         nav a {
             color: #aaa;
             text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 1px;
-            transition: .2s;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
+
 
         nav a:hover {
             color: white;
         }
 
-        /* ================= HERO ================= */
+
+        /* =========================
+           HERO
+        ========================= */
 
         .hero {
-            padding: 55px 6% 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            padding: 45px 6% 35px;
         }
 
-        .hero-text {
-            max-width: 350px;
-        }
 
-        .hero-text p {
-            color: #aaa;
+        .hero p {
+            color: #999;
             font-size: 12px;
-            line-height: 1.6;
+            line-height: 1.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: 320px;
+        }
+
+
+        /* =========================
+           FILTROS
+        ========================= */
+
+        .filters {
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+
+            padding: 0 6% 30px;
+
+            color: #999;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .filters {
-            color: #999;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
 
-        /* ================= PRODUCTS ================= */
+        /* =========================
+           PRODUTOS
+        ========================= */
 
         .products {
-            padding: 0 5.5% 80px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+
+            padding: 0 6% 80px;
         }
+
 
         .product {
             cursor: pointer;
-            border: 1px solid #252525;
-            background: #0c0c0c;
-            transition: .3s;
         }
 
-        .product:hover {
-            border-color: #555;
-            transform: translateY(-3px);
-        }
 
         .product-image {
-            height: 600px;
-            background: #111;
             position: relative;
+
+            width: 100%;
+            aspect-ratio: 1 / 1;
+
+            background: #111;
+
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
+
 
         .product-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+
+            object-fit: cover;
+
             display: block;
+
+            transition: transform 0.5s ease;
         }
+
+
+        .product:hover .product-image img {
+            transform: scale(1.025);
+        }
+
 
         .tag {
             position: absolute;
-            top: 16px;
-            left: 16px;
+
+            top: 18px;
+            left: 18px;
+
             z-index: 2;
+
             border: 1px solid white;
+
             padding: 8px 13px;
+
             font-size: 9px;
             letter-spacing: 2px;
-            background: #050505;
         }
 
+
         .product-info {
-            height: 90px;
-            padding: 20px;
+            min-height: 90px;
+
+            background: #090909;
+
+            padding: 22px 20px;
+
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+
+            border: 1px solid #202020;
+            border-top: none;
         }
+
 
         .product-name {
             font-size: 13px;
             font-weight: bold;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+
+            margin-bottom: 10px;
         }
+
 
         .product-price {
             font-size: 11px;
             color: #999;
         }
 
+
         .product-arrow {
             font-size: 25px;
             font-weight: 200;
+
+            transition: transform 0.3s ease;
         }
 
-        /* ================= MODAL ================= */
 
-        .modal {
-            display: none;
+        .product:hover .product-arrow {
+            transform: translateX(7px);
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .product-modal {
             position: fixed;
+
             inset: 0;
-            background: #050505;
-            z-index: 100;
-            overflow-y: auto;
+
+            background: rgba(0, 0, 0, 0.94);
+
+            z-index: 9999;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
         }
 
-        .modal.active {
+
+        .product-modal.active {
+            display: flex;
+        }
+
+
+        .product-modal-content {
+            width: 92%;
+            max-width: 1200px;
+
+            max-height: 92vh;
+
+            background: #090909;
+
+            border: 1px solid #222;
+
+            display: grid;
+
+            grid-template-columns: minmax(0, 1fr) 300px;
+
+            gap: 45px;
+
+            padding: 35px;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           BOTÃO FECHAR
+        ========================= */
+
+        .close-modal {
+            position: absolute;
+
+            right: 20px;
+            top: 15px;
+
+            z-index: 5;
+
+            width: 35px;
+            height: 35px;
+
+            background: none;
+
+            border: none;
+
+            color: white;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            font-weight: 200;
+        }
+
+
+        .close-modal:hover {
+            opacity: 0.6;
+        }
+
+
+        /* =========================
+           IMAGEM DO PRODUTO
+        ========================= */
+
+        .product-gallery {
+            min-width: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #111;
+
+            min-height: 550px;
+        }
+
+
+        .product-gallery img {
+            width: 100%;
+            height: 100%;
+
+            max-height: 70vh;
+
+            object-fit: contain;
+
             display: block;
         }
 
-        .modal-header {
-            height: 70px;
-            border-bottom: 1px solid #222;
+
+        /* =========================
+           INFORMAÇÕES
+        ========================= */
+
+        .product-details {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            position: sticky;
-            top: 0;
-            background: rgba(5,5,5,.97);
-            z-index: 5;
-        }
 
-        .close {
-            font-size: 28px;
-            cursor: pointer;
-            color: #aaa;
-            transition: .2s;
-        }
+            flex-direction: column;
 
-        .close:hover {
-            color: white;
-        }
-
-        .modal-content {
-            max-width: 1300px;
-            margin: auto;
-            padding: 50px 5%;
-            display: grid;
-            grid-template-columns: 1.2fr .8fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        /* imagem grande */
-
-        .detail-image {
-            background: #111;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
         }
 
-        .detail-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
 
-        /* informações */
+        .product-details h2 {
+            font-size: 22px;
 
-        .details {
-            padding-top: 30px;
-        }
-
-        .details h1 {
-            font-size: 28px;
             letter-spacing: 1px;
+
             margin-bottom: 15px;
         }
 
-        .details .price {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 35px;
-        }
 
-        .description {
+        .product-details .price {
             color: #999;
-            font-size: 12px;
-            line-height: 1.8;
-            margin-bottom: 35px;
+
+            font-size: 13px;
+
+            margin-bottom: 40px;
         }
 
-        /* BOTÕES FRENTE / VERSO */
+
+        /* =========================
+           FRENTE / VERSO
+        ========================= */
+
+        .view-title {
+            color: #777;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
 
         .view-buttons {
             display: flex;
+
             gap: 8px;
-            margin-bottom: 35px;
         }
+
 
         .view-buttons button {
             background: transparent;
-            color: #aaa;
-            border: 1px solid #333;
-            padding: 13px 25px;
-            font-size: 10px;
-            letter-spacing: 1.5px;
+
+            color: white;
+
+            border: 1px solid #444;
+
+            padding: 13px 20px;
+
             cursor: pointer;
-            transition: .2s;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            transition: all 0.2s ease;
         }
+
 
         .view-buttons button:hover {
             border-color: white;
-            color: white;
         }
+
 
         .view-buttons button.active {
             background: white;
+
             color: black;
+
             border-color: white;
         }
 
-        .buy-button {
-            width: 100%;
-            height: 55px;
-            background: white;
-            color: black;
-            border: none;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            transition: .2s;
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #202020;
+
+            padding: 35px 6%;
+
+            color: #666;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
         }
 
-        .buy-button:hover {
-            background: #ddd;
-        }
 
-        /* ================= MOBILE ================= */
+        /* =========================
+           CELULAR
+        ========================= */
 
         @media (max-width: 800px) {
 
@@ -306,421 +443,606 @@
                 padding: 0 20px;
             }
 
+
             nav {
                 gap: 15px;
             }
 
-            nav a:nth-child(n+3) {
-                display: none;
+
+            nav a {
+                font-size: 9px;
             }
+
 
             .hero {
-                padding: 35px 20px 25px;
+                padding: 35px 20px;
             }
 
+
             .filters {
-                display: none;
+                padding: 0 20px 20px;
+
+                justify-content: flex-start;
+
+                gap: 15px;
+
+                flex-wrap: wrap;
             }
+
 
             .products {
                 grid-template-columns: 1fr;
-                padding: 0 15px 50px;
+
+                padding: 0 20px 50px;
             }
 
-            .product-image {
-                height: 500px;
+
+            .product-modal {
+                padding: 10px;
             }
 
-            .modal-content {
-                grid-template-columns: 1fr;
+
+            .product-modal-content {
+
+                width: 96%;
+
+                max-height: 95vh;
+
+                overflow-y: auto;
+
+                display: flex;
+
+                flex-direction: column;
+
                 gap: 20px;
-                padding: 25px 15px 50px;
+
+                padding: 20px;
             }
 
-            .details {
-                padding-top: 10px;
+
+            .product-gallery {
+                min-height: 400px;
             }
 
-            .details h1 {
-                font-size: 23px;
+
+            .product-gallery img {
+                max-height: 55vh;
             }
 
-            .detail-image {
-                aspect-ratio: 1 / 1;
+
+            .product-details {
+                padding-bottom: 15px;
             }
+
+
+            .product-details h2 {
+                font-size: 18px;
+            }
+
         }
+
+
     </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= HEADER ================= -->
 
-<header>
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-    <div class="logo">
-        VICO
-    </div>
-
-    <nav>
-        <a href="#">HOME</a>
-        <a href="#">SHOP</a>
-        <a href="#">COLEÇÃO</a>
-        <a href="#">SOBRE</a>
-    </nav>
-
-</header>
-
-
-<!-- ================= HOME ================= -->
-
-<section class="hero">
-
-    <div class="hero-text">
-        <p>
-            Peças feitas para quem não tem medo
-            de enxergar além do óbvio.
-        </p>
-    </div>
-
-    <div class="filters">
-        FILTRAR ↓ &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-        ORDENAR: MAIS RECENTES ↓
-    </div>
-
-</section>
-
-
-<!-- ================= PRODUTOS ================= -->
-
-<section class="products">
-
-
-    <!-- THE TRUTH HURTS -->
-
-    <article
-        class="product"
-        onclick="openProduct('truth')"
-    >
-
-        <div class="product-image">
-
-            <span class="tag">
-                NOVO
-            </span>
-
-            <!-- SOMENTE FRENTE -->
-            <img
-                src="the-truth-hurts.png"
-                alt="The Truth Hurts Tee"
-            >
-
-        </div>
-
-        <div class="product-info">
-
-            <div>
-
-                <div class="product-name">
-                    THE TRUTH HURTS TEE
-                </div>
-
-                <div class="product-price">
-                    R$ 129,00
-                </div>
-
-            </div>
-
-            <div class="product-arrow">
-                →
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <!-- KYAN -->
-
-    <article
-        class="product"
-        onclick="openProduct('kyan')"
-    >
-
-        <div class="product-image">
-
-            <span class="tag">
-                NOVO
-            </span>
-
-            <!-- SOMENTE FRENTE -->
-            <img
-                src="kyan.png"
-                alt="Kyan Tee"
-            >
-
-        </div>
-
-        <div class="product-info">
-
-            <div>
-
-                <div class="product-name">
-                    KYAN TEE
-                </div>
-
-                <div class="product-price">
-                    R$ 129,00
-                </div>
-
-            </div>
-
-            <div class="product-arrow">
-                →
-            </div>
-
-        </div>
-
-    </article>
-
-</section>
-
-
-
-<!-- ================= MODAL DO PRODUTO ================= -->
-
-<div
-    class="modal"
-    id="productModal"
->
-
-    <div class="modal-header">
+    <header>
 
         <div class="logo">
             VICO
         </div>
 
-        <div
-            class="close"
-            onclick="closeProduct()"
-        >
-            ×
-        </div>
+
+        <nav>
+
+            <a href="#">
+                HOME
+            </a>
+
+            <a href="#shop">
+                SHOP
+            </a>
+
+            <a href="#">
+                COLEÇÃO
+            </a>
+
+            <a href="#">
+                SOBRE
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <p>
+            Peças feitas para quem não tem medo
+            de enxergar além do óbvio.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         FILTROS
+    ========================= -->
+
+    <div class="filters">
+
+        <span>
+            FILTRAR ↓
+        </span>
+
+        <span>
+            ORDENAR: MAIS RECENTES ↓
+        </span>
 
     </div>
 
 
-    <div class="modal-content">
+
+    <!-- =========================
+         PRODUTOS
+    ========================= -->
+
+    <section
+        class="products"
+        id="shop"
+    >
 
 
-        <!-- IMAGEM -->
+        <!-- THE TRUTH HURTS -->
 
-        <div class="detail-image">
+        <article
+            class="product"
+            onclick="openProduct('truth')"
+        >
 
-            <img
-                id="detailImage"
-                src=""
-                alt=""
-            >
+            <div class="product-image">
 
-        </div>
-
-
-        <!-- INFORMAÇÕES -->
-
-        <div class="details">
-
-            <h1 id="detailName">
-                PRODUTO
-            </h1>
-
-            <div
-                class="price"
-                id="detailPrice"
-            >
-                R$ 129,00
-            </div>
+                <span class="tag">
+                    NOVO
+                </span>
 
 
-            <div class="description">
+                <!-- SOMENTE A FRENTE NA VITRINE -->
 
-                Uma peça criada para quem não
-                tem medo de enxergar além do óbvio.
-
-                <br><br>
-
-                Produção limitada VICO.
-
-            </div>
-
-
-            <!-- FRENTE / VERSO -->
-
-            <div class="view-buttons">
-
-                <button
-                    id="frontButton"
-                    class="active"
-                    onclick="showFront()"
+                <img
+                    src="the-truth-hurts-front.png"
+                    alt="The Truth Hurts Tee"
                 >
-                    FRENTE
-                </button>
-
-                <button
-                    id="backButton"
-                    onclick="showBack()"
-                >
-                    VERSO
-                </button>
 
             </div>
 
 
-            <button class="buy-button">
-                COMPRAR
+            <div class="product-info">
+
+                <div>
+
+                    <div class="product-name">
+                        THE TRUTH HURTS TEE
+                    </div>
+
+                    <div class="product-price">
+                        R$ 129,00
+                    </div>
+
+                </div>
+
+
+                <div class="product-arrow">
+                    →
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- KYAN -->
+
+        <article
+            class="product"
+            onclick="openProduct('kyan')"
+        >
+
+            <div class="product-image">
+
+                <span class="tag">
+                    NOVO
+                </span>
+
+
+                <!-- SOMENTE A FRENTE NA VITRINE -->
+
+                <img
+                    src="kyan-front.png"
+                    alt="Kyan Tee"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div>
+
+                    <div class="product-name">
+                        KYAN TEE
+                    </div>
+
+                    <div class="product-price">
+                        R$ 129,00
+                    </div>
+
+                </div>
+
+
+                <div class="product-arrow">
+                    →
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         MODAL
+    ========================= -->
+
+    <div
+        id="productModal"
+        class="product-modal"
+        onclick="closeOutside(event)"
+    >
+
+
+        <div
+            class="product-modal-content"
+            onclick="event.stopPropagation()"
+        >
+
+
+            <!-- FECHAR -->
+
+            <button
+                class="close-modal"
+                onclick="closeProduct()"
+            >
+                ×
             </button>
 
+
+
+            <!-- IMAGEM -->
+
+            <div class="product-gallery">
+
+                <img
+                    id="productMainImage"
+                    src=""
+                    alt="Produto"
+                >
+
+            </div>
+
+
+
+            <!-- INFORMAÇÕES -->
+
+            <div class="product-details">
+
+
+                <h2 id="productTitle">
+                    PRODUTO
+                </h2>
+
+
+                <div
+                    class="price"
+                    id="productPrice"
+                >
+                    R$ 129,00
+                </div>
+
+
+
+                <div class="view-title">
+                    VISUALIZAR
+                </div>
+
+
+
+                <div class="view-buttons">
+
+
+                    <button
+                        id="frontButton"
+                        class="active"
+                        onclick="showSide('front')"
+                    >
+                        FRENTE
+                    </button>
+
+
+                    <button
+                        id="backButton"
+                        onclick="showSide('back')"
+                    >
+                        VERSO
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
         </div>
+
 
     </div>
 
-</div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 VICO — TODOS OS DIREITOS RESERVADOS.
+
+    </footer>
 
 
 
-<script>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-    /* ================= PRODUTOS ================= */
-
-    const products = {
-
-        truth: {
-
-            name: "THE TRUTH HURTS TEE",
-
-            price: "R$ 129,00",
-
-            front: "the-truth-hurts.png",
-
-            back: "the-truth-hurts-back.png"
-
-        },
+    <script>
 
 
-        kyan: {
+        const products = {
 
-            name: "KYAN TEE",
 
-            price: "R$ 129,00",
+            truth: {
 
-            front: "kyan.png",
+                title: "THE TRUTH HURTS TEE",
 
-            back: "kyan-back.png"
+                price: "R$ 129,00",
+
+                front: "the-truth-hurts-front.png",
+
+                back: "the-truth-hurts-back.png"
+
+            },
+
+
+            kyan: {
+
+                title: "KYAN TEE",
+
+                price: "R$ 129,00",
+
+                front: "kyan-front.png",
+
+                back: "kyan-back.png"
+
+            }
+
+        };
+
+
+
+        let currentProduct = null;
+
+
+
+        /* =========================
+           ABRIR PRODUTO
+        ========================= */
+
+        function openProduct(productName) {
+
+
+            currentProduct = products[productName];
+
+
+            document
+                .getElementById("productModal")
+                .classList
+                .add("active");
+
+
+            document
+                .getElementById("productTitle")
+                .textContent = currentProduct.title;
+
+
+            document
+                .getElementById("productPrice")
+                .textContent = currentProduct.price;
+
+
+            /*
+             * SEMPRE COMEÇA NA FRENTE
+             */
+
+            document
+                .getElementById("productMainImage")
+                .src = currentProduct.front;
+
+
+            document
+                .getElementById("frontButton")
+                .classList
+                .add("active");
+
+
+            document
+                .getElementById("backButton")
+                .classList
+                .remove("active");
+
+
+            document.body.style.overflow = "hidden";
 
         }
 
-    };
 
 
-    let currentProduct = null;
+        /* =========================
+           TROCAR FRENTE / VERSO
+        ========================= */
+
+        function showSide(side) {
 
 
-    /* ================= ABRIR PRODUTO ================= */
-
-    function openProduct(product) {
-
-        currentProduct = products[product];
-
-        document.getElementById("detailName").textContent =
-            currentProduct.name;
-
-        document.getElementById("detailPrice").textContent =
-            currentProduct.price;
-
-        document.getElementById("detailImage").src =
-            currentProduct.front;
-
-        document.getElementById("detailImage").alt =
-            currentProduct.name;
+            if (!currentProduct) {
+                return;
+            }
 
 
-        document.getElementById("frontButton")
-            .classList.add("active");
-
-        document.getElementById("backButton")
-            .classList.remove("active");
+            const image =
+                document.getElementById("productMainImage");
 
 
-        document.getElementById("productModal")
-            .classList.add("active");
-
-        document.body.style.overflow = "hidden";
-
-    }
+            const frontButton =
+                document.getElementById("frontButton");
 
 
-    /* ================= FRENTE ================= */
-
-    function showFront() {
-
-        if (!currentProduct) return;
-
-        document.getElementById("detailImage").src =
-            currentProduct.front;
-
-        document.getElementById("frontButton")
-            .classList.add("active");
-
-        document.getElementById("backButton")
-            .classList.remove("active");
-
-    }
+            const backButton =
+                document.getElementById("backButton");
 
 
-    /* ================= VERSO ================= */
 
-    function showBack() {
-
-        if (!currentProduct) return;
-
-        document.getElementById("detailImage").src =
-            currentProduct.back;
-
-        document.getElementById("backButton")
-            .classList.add("active");
-
-        document.getElementById("frontButton")
-            .classList.remove("active");
-
-    }
+            if (side === "front") {
 
 
-    /* ================= FECHAR ================= */
-
-    function closeProduct() {
-
-        document.getElementById("productModal")
-            .classList.remove("active");
-
-        document.body.style.overflow = "auto";
-
-    }
+                image.src =
+                    currentProduct.front;
 
 
-    /* ================= ESC ================= */
+                frontButton
+                    .classList
+                    .add("active");
 
-    document.addEventListener(
-        "keydown",
-        function(event) {
 
-            if (event.key === "Escape") {
-                closeProduct();
+                backButton
+                    .classList
+                    .remove("active");
+
+            }
+
+
+
+            if (side === "back") {
+
+
+                image.src =
+                    currentProduct.back;
+
+
+                backButton
+                    .classList
+                    .add("active");
+
+
+                frontButton
+                    .classList
+                    .remove("active");
+
             }
 
         }
-    );
 
-</script>
+
+
+        /* =========================
+           FECHAR
+        ========================= */
+
+        function closeProduct() {
+
+
+            document
+                .getElementById("productModal")
+                .classList
+                .remove("active");
+
+
+            document.body.style.overflow = "";
+
+        }
+
+
+
+        /* =========================
+           CLICAR FORA
+        ========================= */
+
+        function closeOutside(event) {
+
+
+            if (
+                event.target.id === "productModal"
+            ) {
+
+                closeProduct();
+
+            }
+
+        }
+
+
+
+        /* =========================
+           ESC PARA FECHAR
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeProduct();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
 
 </body>
+
 </html>
