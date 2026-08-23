@@ -664,29 +664,20 @@
 
 
 
-    <!-- FUTURO PRODUTO -->
+    <!-- KYAN -->
 
-    <article class="product">
+    <article class="product" onclick="openKyan()">
 
-        <div
-            class="product-image"
-            style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                background:#0b0b0b;
-            "
-        >
+        <div class="product-image">
 
-            <div
-                style="
-                    color:#333;
-                    font-size:12px;
-                    letter-spacing:2px;
-                "
+            <span class="tag">
+                NOVO
+            </span>
+
+            <img
+                src="assets/kyan.png"
+                alt="Kyan Tee"
             >
-                NEXT DROP
-            </div>
 
         </div>
 
@@ -696,11 +687,11 @@
             <div>
 
                 <div class="product-name">
-                    EM BREVE
+                    KYAN TEE
                 </div>
 
                 <div class="product-price">
-                    —
+                    R$ 129,00
                 </div>
 
             </div>
@@ -910,6 +901,17 @@
 
         alert(
             "THE TRUTH HURTS TEE\n\n" +
+            "R$ 129,00\n\n" +
+            "A página do produto será adicionada na próxima etapa."
+        );
+
+    }
+
+
+    function openKyan() {
+
+        alert(
+            "KYAN TEE\n\n" +
             "R$ 129,00\n\n" +
             "A página do produto será adicionada na próxima etapa."
         );
