@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,1166 +7,415 @@
     <title>VICO — Shop</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background: #070707;
+            background: #050505;
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font-family: inherit;
         }
 
         /* ================= HEADER ================= */
 
         header {
-            position: fixed;
-            top: 31px;
-            left: 0;
-
-            width: 100%;
-            height: 72px;
-
+            height: 70px;
+            border-bottom: 1px solid #202020;
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            padding: 0 55px;
-
-            background: rgba(7, 7, 7, 0.88);
-            backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid #1d1d1d;
-
-            z-index: 1000;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            background: rgba(5,5,5,.96);
+            z-index: 10;
         }
 
         .logo {
-            font-size: 29px;
+            font-size: 28px;
             font-weight: 900;
             letter-spacing: -2px;
         }
 
         nav {
             display: flex;
-            gap: 42px;
-
-            font-size: 12px;
-            letter-spacing: 1px;
+            gap: 35px;
         }
 
         nav a {
             color: #aaa;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
             transition: .2s;
         }
 
-        nav a:hover,
-        nav a.active {
+        nav a:hover {
             color: white;
         }
 
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-        }
+        /* ================= HERO ================= */
 
-        .icon-button {
-            border: none;
-            background: none;
-            color: white;
-
-            font-size: 20px;
-
-            cursor: pointer;
-        }
-
-        .cart {
-            position: relative;
-        }
-
-        .cart-number {
-            position: absolute;
-
-            top: -8px;
-            right: -9px;
-
-            width: 16px;
-            height: 16px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: white;
-            color: black;
-
-            border-radius: 50%;
-
-            font-size: 9px;
-            font-weight: bold;
-        }
-
-
-        /* ================= SHOP ================= */
-
-        main {
-            padding-top: 103px;
-        }
-
-        .shop-header {
-            padding: 90px 6% 45px;
-
+        .hero {
+            padding: 55px 6% 35px;
             display: flex;
             justify-content: space-between;
-            align-items: end;
+            align-items: flex-end;
         }
 
-        .shop-title {
-            font-size: clamp(65px, 8vw, 110px);
-
-            font-weight: 900;
-
-            letter-spacing: -6px;
-
-            line-height: .8;
+        .hero-text {
+            max-width: 350px;
         }
 
-        .shop-description {
-            margin-top: 25px;
-
-            max-width: 310px;
-
+        .hero-text p {
+            color: #aaa;
             font-size: 12px;
             line-height: 1.6;
-
-            color: #888;
-
-            letter-spacing: .5px;
-        }
-
-        .shop-options {
-            display: flex;
-            gap: 35px;
-
-            font-size: 11px;
-
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .shop-option {
-            color: #aaa;
-
-            cursor: pointer;
-
-            border-bottom: 1px solid transparent;
-
-            padding-bottom: 6px;
+        .filters {
+            color: #999;
+            font-size: 11px;
+            letter-spacing: 1px;
         }
-
-        .shop-option:hover {
-            color: white;
-            border-color: white;
-        }
-
 
         /* ================= PRODUCTS ================= */
 
         .products {
-            padding: 0 5.5% 90px;
-
+            padding: 0 5.5% 80px;
             display: grid;
-
             grid-template-columns: repeat(2, 1fr);
-
             gap: 20px;
         }
 
         .product {
-            background: #0c0c0c;
-
-            border: 1px solid #202020;
-
             cursor: pointer;
-
+            border: 1px solid #252525;
+            background: #0c0c0c;
             transition: .3s;
         }
 
         .product:hover {
-            border-color: #3a3a3a;
+            border-color: #555;
             transform: translateY(-3px);
         }
 
         .product-image {
-            position: relative;
-
-            width: 100%;
-
-            aspect-ratio: 1.35;
-
+            height: 600px;
             background: #111;
-
+            position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
-
-            object-fit: cover;
-
-            transition: transform .6s ease;
-        }
-
-        .product:hover .product-image img {
-            transform: scale(1.025);
+            object-fit: contain;
+            display: block;
         }
 
         .tag {
             position: absolute;
-
-            top: 18px;
-            left: 18px;
-
-            padding: 8px 11px;
-
-            border: 1px solid white;
-
-            font-size: 9px;
-
-            letter-spacing: 1.5px;
-
-            font-weight: bold;
-
+            top: 16px;
+            left: 16px;
             z-index: 2;
+            border: 1px solid white;
+            padding: 8px 13px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            background: #050505;
         }
 
         .product-info {
-            min-height: 95px;
-
-            padding: 22px;
-
+            height: 90px;
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .product-name {
-            font-size: 14px;
-
-            font-weight: 600;
-
-            letter-spacing: .7px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
         .product-price {
-            margin-top: 9px;
-
-            font-size: 12px;
-
+            font-size: 11px;
             color: #999;
         }
 
         .product-arrow {
-            font-size: 27px;
-
-            font-weight: 200;
-
-            transition: .3s;
-        }
-
-        .product:hover .product-arrow {
-            transform: translateX(7px);
-        }
-
-
-        /* ================= INFORMATION ================= */
-
-        .information {
-            border-top: 1px solid #222;
-
-            border-bottom: 1px solid #222;
-
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            padding: 42px 5.5%;
-        }
-
-        .info {
-            padding: 0 30px;
-
-            border-right: 1px solid #252525;
-        }
-
-        .info:first-child {
-            padding-left: 0;
-        }
-
-        .info:last-child {
-            border-right: none;
-        }
-
-        .info-icon {
             font-size: 25px;
-
-            margin-bottom: 15px;
+            font-weight: 200;
         }
 
-        .info-title {
-            font-size: 11px;
+        /* ================= MODAL ================= */
 
-            letter-spacing: 1px;
-
-            font-weight: bold;
-
-            margin-bottom: 9px;
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #050505;
+            z-index: 100;
+            overflow-y: auto;
         }
 
-        .info-text {
-            color: #666;
-
-            font-size: 10px;
-
-            line-height: 1.6;
-        }
-
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            padding: 70px 5.5% 30px;
-        }
-
-        .footer-content {
-            display: grid;
-
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-
-            gap: 40px;
-
-            padding-bottom: 70px;
-        }
-
-        .footer-logo {
-            font-size: 32px;
-
-            font-weight: 900;
-
-            letter-spacing: -2px;
-        }
-
-        .footer-description {
-            color: #666;
-
-            font-size: 11px;
-
-            line-height: 1.7;
-
-            max-width: 270px;
-
-            margin-top: 15px;
-        }
-
-        .footer-column h3 {
-            font-size: 10px;
-
-            letter-spacing: 1.5px;
-
-            margin-bottom: 20px;
-        }
-
-        .footer-column a {
+        .modal.active {
             display: block;
+        }
 
-            color: #666;
+        .modal-header {
+            height: 70px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            background: rgba(5,5,5,.97);
+            z-index: 5;
+        }
 
-            font-size: 11px;
-
-            margin-bottom: 13px;
-
+        .close {
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
             transition: .2s;
         }
 
-        .footer-column a:hover {
+        .close:hover {
             color: white;
         }
 
-        .copyright {
-            border-top: 1px solid #222;
-
-            padding-top: 25px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            color: #444;
-
-            font-size: 9px;
-
-            letter-spacing: 1px;
+        .modal-content {
+            max-width: 1300px;
+            margin: auto;
+            padding: 50px 5%;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 60px;
+            align-items: start;
         }
 
+        /* imagem grande */
+
+        .detail-image {
+            background: #111;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* informações */
+
+        .details {
+            padding-top: 30px;
+        }
+
+        .details h1 {
+            font-size: 28px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .details .price {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        .description {
+            color: #999;
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        /* BOTÕES FRENTE / VERSO */
+
+        .view-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 35px;
+        }
+
+        .view-buttons button {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #333;
+            padding: 13px 25px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .view-buttons button:hover {
+            border-color: white;
+            color: white;
+        }
+
+        .view-buttons button.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .buy-button {
+            width: 100%;
+            height: 55px;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: .2s;
+        }
+
+        .buy-button:hover {
+            background: #ddd;
+        }
 
         /* ================= MOBILE ================= */
 
         @media (max-width: 800px) {
 
             header {
-                height: 64px;
-
                 padding: 0 20px;
             }
 
-            .logo {
-                font-size: 25px;
+            nav {
+                gap: 15px;
             }
 
-            nav {
+            nav a:nth-child(n+3) {
                 display: none;
             }
 
-            main {
-                padding-top: 64px;
+            .hero {
+                padding: 35px 20px 25px;
             }
 
-            .shop-header {
-                padding: 65px 20px 35px;
-
-                display: block;
-            }
-
-            .shop-title {
-                font-size: 70px;
-
-                letter-spacing: -5px;
-            }
-
-            .shop-description {
-                margin-top: 22px;
-            }
-
-            .shop-options {
-                margin-top: 30px;
-
-                gap: 22px;
+            .filters {
+                display: none;
             }
 
             .products {
-                padding: 0 15px 60px;
-
                 grid-template-columns: 1fr;
-
-                gap: 12px;
+                padding: 0 15px 50px;
             }
 
             .product-image {
-                aspect-ratio: 1.15;
+                height: 500px;
             }
 
-            .product-info {
-                padding: 18px;
+            .modal-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 25px 15px 50px;
             }
 
-            .information {
-                grid-template-columns: 1fr 1fr;
-
-                gap: 30px;
-
-                padding: 35px 20px;
+            .details {
+                padding-top: 10px;
             }
 
-            .info {
-                padding: 0;
-
-                border: none;
+            .details h1 {
+                font-size: 23px;
             }
 
-            footer {
-                padding: 50px 20px 25px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-
-            .copyright {
-                flex-direction: column;
-
-                gap: 10px;
+            .detail-image {
+                aspect-ratio: 1 / 1;
             }
         }
-
-    
-/* ================= PRODUCT PAGE ================= */
-
-.product-page,
-.cart-page {
-    position: fixed;
-    inset: 0;
-    background: #070707;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: .35s ease;
-    overflow-y: auto;
-}
-
-.product-page.open,
-.cart-page.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.close-product {
-    position: fixed;
-    top: 25px;
-    right: 35px;
-    width: 45px;
-    height: 45px;
-    border: 1px solid #333;
-    background: #0c0c0c;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.product-page-content {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap: 70px;
-    padding: 100px 7%;
-    align-items: center;
-}
-
-.product-page-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: #111;
-    overflow: hidden;
-}
-
-.product-page-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.product-page-info {
-    max-width: 500px;
-}
-
-.product-page-tag {
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: #777;
-    margin-bottom: 20px;
-}
-
-.product-page-info h1,
-.cart-content h1 {
-    font-size: clamp(35px, 5vw, 65px);
-    line-height: .9;
-    letter-spacing: -3px;
-    margin-bottom: 25px;
-}
-
-.product-page-price {
-    font-size: 17px;
-    margin-bottom: 35px;
-}
-
-.product-page-description {
-    color: #777;
-    font-size: 12px;
-    line-height: 1.7;
-    border-top: 1px solid #222;
-    border-bottom: 1px solid #222;
-    padding: 25px 0;
-    margin-bottom: 30px;
-}
-
-.product-option {
-    margin-bottom: 28px;
-}
-
-.product-option > span {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    margin-bottom: 13px;
-    color: #888;
-}
-
-.sizes {
-    display: flex;
-    gap: 8px;
-}
-
-.size-button {
-    width: 55px;
-    height: 50px;
-    background: transparent;
-    color: white;
-    border: 1px solid #333;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.size-button:hover,
-.size-button.selected {
-    background: white;
-    color: black;
-    border-color: white;
-}
-
-.quantity {
-    display: flex;
-    align-items: center;
-    width: 145px;
-    height: 50px;
-    border: 1px solid #333;
-}
-
-.quantity button {
-    width: 45px;
-    height: 100%;
-    background: transparent;
-    color: white;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.quantity span {
-    flex: 1;
-    text-align: center;
-    font-size: 13px;
-}
-
-.add-cart {
-    width: 100%;
-    height: 58px;
-    background: white;
-    color: black;
-    border: none;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.add-cart:hover {
-    background: #ddd;
-}
-
-.back-shop {
-    width: 100%;
-    margin-top: 15px;
-    height: 50px;
-    background: transparent;
-    color: #777;
-    border: none;
-    cursor: pointer;
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-.back-shop:hover {
-    color: white;
-}
-
-/* ================= CART ================= */
-
-.cart-content {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 110px 30px 70px;
-}
-
-.cart-content h1 {
-    margin-bottom: 45px;
-}
-
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    padding: 20px 0;
-    border-top: 1px solid #222;
-}
-
-.cart-item img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    background: #111;
-}
-
-.cart-item-info {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    flex: 1;
-}
-
-.cart-item-info strong {
-    font-size: 13px;
-    letter-spacing: .5px;
-}
-
-.cart-item-info span {
-    color: #777;
-    font-size: 11px;
-}
-
-.remove-cart {
-    background: transparent;
-    border: none;
-    color: #777;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.remove-cart:hover {
-    color: white;
-}
-
-.empty-cart {
-    border-top: 1px solid #222;
-    border-bottom: 1px solid #222;
-    padding: 40px 0;
-    color: #666;
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-
-.cart-summary {
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #222;
-    margin-top: 35px;
-    padding: 25px 0;
-}
-
-.cart-summary span {
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
-
-.cart-summary strong {
-    font-size: 18px;
-}
-
-/* Mobile */
-
-@media (max-width: 800px) {
-
-    .product-page-content {
-        grid-template-columns: 1fr;
-        gap: 35px;
-        padding: 80px 20px 40px;
-        align-items: start;
-    }
-
-    .product-page-image {
-        aspect-ratio: 1 / 1;
-    }
-
-    .product-page-info h1,
-    .cart-content h1 {
-        font-size: 42px;
-    }
-
-    .close-product {
-        top: 15px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-    }
-
-    .cart-content {
-        padding: 85px 20px 50px;
-    }
-
-    .cart-item {
-        gap: 15px;
-    }
-
-    .cart-item img {
-        width: 90px;
-        height: 90px;
-    }
-}
-
-
-/* ================= BUSSFLY-INSPIRED STORE UI ================= */
-
-.announcement-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 31px;
-    background: #fff;
-    color: #080808;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 70px;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 1.3px;
-    z-index: 1100;
-}
-
-.header-link {
-    border: 0;
-    background: transparent;
-    color: #aaa;
-    font-size: 9px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.header-link:hover {
-    color: #fff;
-}
-
-.search-panel {
-    position: fixed;
-    top: 103px;
-    left: 0;
-    width: 100%;
-    background: rgba(7,7,7,.98);
-    border-bottom: 1px solid #222;
-    z-index: 1050;
-    transform: translateY(-110%);
-    transition: .3s ease;
-}
-
-.search-panel.open {
-    transform: translateY(0);
-}
-
-.search-inner {
-    max-width: 1200px;
-    margin: auto;
-    padding: 28px 5.5%;
-    display: flex;
-    gap: 15px;
-}
-
-.search-inner input {
-    flex: 1;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid #444;
-    outline: none;
-    color: #fff;
-    padding: 12px 0;
-    font-size: 18px;
-}
-
-.search-inner button {
-    border: 0;
-    background: transparent;
-    color: #fff;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.shop-tools {
-    display: flex;
-    gap: 14px;
-}
-
-.shop-option {
-    background: transparent;
-    border: 1px solid #292929;
-    color: #aaa;
-    padding: 12px 15px;
-    font-size: 9px;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
-.shop-option:hover {
-    color: #fff;
-    border-color: #666;
-}
-
-.shop-option span {
-    color: #fff;
-}
-
-.shipping-tag {
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    background: #fff;
-    color: #000;
-    padding: 7px 9px;
-    font-size: 7px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    z-index: 2;
-}
-
-.filter-drawer {
-    position: fixed;
-    top: 103px;
-    right: 0;
-    width: min(390px, 100%);
-    height: calc(100vh - 103px);
-    background: #0b0b0b;
-    border-left: 1px solid #292929;
-    z-index: 1200;
-    transform: translateX(100%);
-    transition: .3s ease;
-}
-
-.filter-drawer.open {
-    transform: translateX(0);
-}
-
-.filter-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px;
-    border-bottom: 1px solid #222;
-    font-size: 10px;
-    letter-spacing: 2px;
-}
-
-.filter-head button {
-    background: none;
-    border: 0;
-    color: #fff;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.filter-body {
-    padding: 25px;
-    display: grid;
-    gap: 10px;
-}
-
-.filter-body button {
-    background: transparent;
-    border: 1px solid #333;
-    color: #fff;
-    padding: 15px;
-    text-align: left;
-    font-size: 9px;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
-.filter-body button:hover {
-    background: #fff;
-    color: #000;
-}
-
-@media (max-width: 800px) {
-    .announcement-bar {
-        gap: 15px;
-        font-size: 6px;
-        padding: 0 8px;
-    }
-
-    header {
-        top: 31px;
-    }
-
-    main {
-        padding-top: 103px;
-    }
-
-    .header-link {
-        display: none;
-    }
-
-    .shop-tools {
-        margin-top: 28px;
-    }
-
-    .shop-option {
-        font-size: 8px;
-        padding: 10px;
-    }
-
-    .search-panel,
-    .filter-drawer {
-        top: 103px;
-    }
-}
-
-</style>
+    </style>
 </head>
 
-
 <body>
-
-<div class="announcement-bar">
-    <div>PARCELE EM ATÉ 3X SEM JUROS</div>
-    <div>FRETE GRÁTIS A PARTIR DE R$399</div>
-    <div>5% OFF NO PIX</div>
-</div>
-
 
 <!-- ================= HEADER ================= -->
 
 <header>
 
-    <a href="index.html" class="logo">
+    <div class="logo">
         VICO
-    </a>
+    </div>
 
     <nav>
-
-        <a href="index.html">
-            HOME
-        </a>
-
-        <a href="#" class="active">
-            SHOP
-        </a>
-
-        <a href="#">
-            COLEÇÃO
-        </a>
-
-        <a href="#">
-            SOBRE
-        </a>
-
+        <a href="#">HOME</a>
+        <a href="#">SHOP</a>
+        <a href="#">COLEÇÃO</a>
+        <a href="#">SOBRE</a>
     </nav>
-
-
-    <div class="header-icons">
-
-        <button class="header-link" onclick="toggleSearch()">
-            BUSCAR
-        </button>
-
-        <button class="header-link account-link">
-            CONTA
-        </button>
-
-        <button class="icon-button cart" onclick="openCart()" aria-label="Carrinho">
-            🛒
-            <span class="cart-number">0</span>
-        </button>
-
-    </div>
 
 </header>
 
-<div id="searchPanel" class="search-panel">
-    <div class="search-inner">
-        <input
-            id="searchInput"
-            type="search"
-            placeholder="Buscar produto..."
-            oninput="filterProducts()"
-        >
-        <button onclick="toggleSearch()">×</button>
-    </div>
-</div>
 
+<!-- ================= HOME ================= -->
 
+<section class="hero">
 
-
-<main>
-
-
-<!-- ================= SHOP HEADER ================= -->
-
-<section class="shop-header">
-
-    <div>
-
-        <h1 class="shop-title">
-            SHOP
-        </h1>
-
-        <p class="shop-description">
-            PEÇAS FEITAS PARA QUEM
-            NÃO TEM MEDO DE ENXERGAR
-            ALÉM DO ÓBVIO.
+    <div class="hero-text">
+        <p>
+            Peças feitas para quem não tem medo
+            de enxergar além do óbvio.
         </p>
-
     </div>
 
-
-    <div class="shop-tools">
-
-        <button class="shop-option" onclick="toggleFilters()">
-            FILTRAR <span>↓</span>
-        </button>
-
-        <button class="shop-option" onclick="sortProducts()">
-            ORDENAR: MAIS RECENTES <span>↓</span>
-        </button>
-
+    <div class="filters">
+        FILTRAR ↓ &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        ORDENAR: MAIS RECENTES ↓
     </div>
 
 </section>
 
 
-
-<!-- ================= PRODUCTS ================= -->
+<!-- ================= PRODUTOS ================= -->
 
 <section class="products">
 
 
     <!-- THE TRUTH HURTS -->
 
-    <article class="product" onclick="openProduct()">
+    <article
+        class="product"
+        onclick="openProduct('truth')"
+    >
 
         <div class="product-image">
 
-            <span class="tag">NOVO</span><span class="shipping-tag">ENVIO IMEDIATO</span>
+            <span class="tag">
+                NOVO
+            </span>
 
+            <!-- SOMENTE FRENTE -->
             <img
                 src="the-truth-hurts.png"
                 alt="The Truth Hurts Tee"
             >
 
         </div>
-
 
         <div class="product-info">
 
@@ -1183,7 +431,6 @@
 
             </div>
 
-
             <div class="product-arrow">
                 →
             </div>
@@ -1193,22 +440,26 @@
     </article>
 
 
-
     <!-- KYAN -->
 
-    <article class="product" onclick="openKyan()">
+    <article
+        class="product"
+        onclick="openProduct('kyan')"
+    >
 
         <div class="product-image">
 
-            <span class="tag">NOVO</span><span class="shipping-tag">ENVIO IMEDIATO</span>
+            <span class="tag">
+                NOVO
+            </span>
 
+            <!-- SOMENTE FRENTE -->
             <img
                 src="kyan.png"
                 alt="Kyan Tee"
             >
 
         </div>
-
 
         <div class="product-info">
 
@@ -1224,7 +475,6 @@
 
             </div>
 
-
             <div class="product-arrow">
                 →
             </div>
@@ -1233,552 +483,244 @@
 
     </article>
 
-
 </section>
 
 
 
-<!-- ================= INFORMATION ================= -->
+<!-- ================= MODAL DO PRODUTO ================= -->
 
-<section class="information">
+<div
+    class="modal"
+    id="productModal"
+>
 
+    <div class="modal-header">
 
-    <div class="info">
-
-        <div class="info-icon">
-            ◇
+        <div class="logo">
+            VICO
         </div>
 
-        <div class="info-title">
-            ENVIO PARA TODO O BRASIL
-        </div>
-
-        <div class="info-text">
-            Receba sua peça onde estiver.
-        </div>
-
-    </div>
-
-
-    <div class="info">
-
-        <div class="info-icon">
-            ♢
-        </div>
-
-        <div class="info-title">
-            PAGAMENTO SEGURO
-        </div>
-
-        <div class="info-text">
-            Compra segura e protegida.
+        <div
+            class="close"
+            onclick="closeProduct()"
+        >
+            ×
         </div>
 
     </div>
 
 
-    <div class="info">
+    <div class="modal-content">
 
-        <div class="info-icon">
-            □
+
+        <!-- IMAGEM -->
+
+        <div class="detail-image">
+
+            <img
+                id="detailImage"
+                src=""
+                alt=""
+            >
+
         </div>
 
-        <div class="info-title">
-            TROCAS E DEVOLUÇÕES
-        </div>
 
-        <div class="info-text">
-            Facilidade caso precise trocar.
-        </div>
+        <!-- INFORMAÇÕES -->
 
-    </div>
+        <div class="details">
 
+            <h1 id="detailName">
+                PRODUTO
+            </h1>
 
-    <div class="info">
-
-        <div class="info-icon">
-            ☆
-        </div>
-
-        <div class="info-title">
-            PRODUÇÃO LIMITADA
-        </div>
-
-        <div class="info-text">
-            Peças produzidas em quantidade limitada.
-        </div>
-
-    </div>
-
-
-</section>
-
-
-
-<div id="filterDrawer" class="filter-drawer">
-    <div class="filter-head">
-        <span>FILTROS</span>
-        <button onclick="toggleFilters()">×</button>
-    </div>
-    <div class="filter-body">
-        <button onclick="showAllProducts()">TODOS</button>
-        <button onclick="filterByPrice()">ATÉ R$129</button>
-    </div>
-</div>
-
-</main>
-
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-
-    <div class="footer-content">
-
-
-        <div class="footer-brand">
-
-            <div class="footer-logo">
-                VICO
+            <div
+                class="price"
+                id="detailPrice"
+            >
+                R$ 129,00
             </div>
 
-            <p class="footer-description">
-                VICO.ARCH — peças para quem
-                escreve a própria história.
-            </p>
+
+            <div class="description">
+
+                Uma peça criada para quem não
+                tem medo de enxergar além do óbvio.
+
+                <br><br>
+
+                Produção limitada VICO.
+
+            </div>
+
+
+            <!-- FRENTE / VERSO -->
+
+            <div class="view-buttons">
+
+                <button
+                    id="frontButton"
+                    class="active"
+                    onclick="showFront()"
+                >
+                    FRENTE
+                </button>
+
+                <button
+                    id="backButton"
+                    onclick="showBack()"
+                >
+                    VERSO
+                </button>
+
+            </div>
+
+
+            <button class="buy-button">
+                COMPRAR
+            </button>
 
         </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                SHOP
-            </h3>
-
-            <a href="#">
-                CAMISETAS
-            </a>
-
-            <a href="#">
-                COLEÇÕES
-            </a>
-
-            <a href="#">
-                NOVOS DROPS
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                SUPORTE
-            </h3>
-
-            <a href="#">
-                CONTATO
-            </a>
-
-            <a href="#">
-                TROCAS
-            </a>
-
-            <a href="#">
-                ENVIO
-            </a>
-
-            <a href="#">
-                FAQ
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                SOCIAL
-            </h3>
-
-            <a href="#">
-                INSTAGRAM
-            </a>
-
-            <a href="#">
-                TIKTOK
-            </a>
-
-        </div>
-
 
     </div>
 
-
-    <div class="copyright">
-
-        <span>
-            © 2026 VICO.ARCH
-        </span>
-
-        <span>
-            ALL RIGHTS RESERVED.
-        </span>
-
-    </div>
-
-
-</footer>
+</div>
 
 
 
 <script>
-let currentProduct = null;
-let selectedSize = null;
-let quantity = 1;
 
-const products = {
-    truth: {
-        name: "THE TRUTH HURTS TEE",
-        price: 129,
-        image: "the-truth-hurts.png",
-        description: "The truth hurts, but lies destroy."
-    },
-    kyan: {
-        name: "KYAN TEE",
-        price: 129,
-        image: "kyan.png",
-        description: "Peça exclusiva VICO.ARCH."
-    }
-};
+    /* ================= PRODUTOS ================= */
 
-let cart = [];
+    const products = {
 
-function openProduct() {
-    currentProduct = products.truth;
-    showProduct();
-}
+        truth: {
 
-function openKyan() {
-    currentProduct = products.kyan;
-    showProduct();
-}
+            name: "THE TRUTH HURTS TEE",
 
-function showProduct() {
-    selectedSize = null;
-    quantity = 1;
+            price: "R$ 129,00",
 
-    document.getElementById("productPage").classList.add("open");
-    document.getElementById("productPageImage").src = currentProduct.image;
-    document.getElementById("productPageName").textContent = currentProduct.name;
-    document.getElementById("productPagePrice").textContent =
-        "R$ " + currentProduct.price.toFixed(2).replace(".", ",");
-    document.getElementById("productPageDescription").textContent =
-        currentProduct.description;
-    document.getElementById("quantity").textContent = quantity;
+            front: "the-truth-hurts.png",
 
-    document.querySelectorAll(".size-button").forEach(button => {
-        button.classList.remove("selected");
-    });
-}
+            back: "the-truth-hurts-back.png"
 
-function closeProduct() {
-    document.getElementById("productPage").classList.remove("open");
-}
+        },
 
-function selectSize(size, button) {
-    selectedSize = size;
 
-    document.querySelectorAll(".size-button").forEach(b => {
-        b.classList.remove("selected");
-    });
+        kyan: {
 
-    button.classList.add("selected");
-}
+            name: "KYAN TEE",
 
-function changeQuantity(value) {
-    quantity += value;
+            price: "R$ 129,00",
 
-    if (quantity < 1) quantity = 1;
+            front: "kyan.png",
 
-    document.getElementById("quantity").textContent = quantity;
-}
+            back: "kyan-back.png"
 
-function addToCart() {
-    if (!selectedSize) {
-        alert("Selecione um tamanho.");
-        return;
+        }
+
+    };
+
+
+    let currentProduct = null;
+
+
+    /* ================= ABRIR PRODUTO ================= */
+
+    function openProduct(product) {
+
+        currentProduct = products[product];
+
+        document.getElementById("detailName").textContent =
+            currentProduct.name;
+
+        document.getElementById("detailPrice").textContent =
+            currentProduct.price;
+
+        document.getElementById("detailImage").src =
+            currentProduct.front;
+
+        document.getElementById("detailImage").alt =
+            currentProduct.name;
+
+
+        document.getElementById("frontButton")
+            .classList.add("active");
+
+        document.getElementById("backButton")
+            .classList.remove("active");
+
+
+        document.getElementById("productModal")
+            .classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
     }
 
-    const existing = cart.find(item =>
-        item.name === currentProduct.name &&
-        item.size === selectedSize
+
+    /* ================= FRENTE ================= */
+
+    function showFront() {
+
+        if (!currentProduct) return;
+
+        document.getElementById("detailImage").src =
+            currentProduct.front;
+
+        document.getElementById("frontButton")
+            .classList.add("active");
+
+        document.getElementById("backButton")
+            .classList.remove("active");
+
+    }
+
+
+    /* ================= VERSO ================= */
+
+    function showBack() {
+
+        if (!currentProduct) return;
+
+        document.getElementById("detailImage").src =
+            currentProduct.back;
+
+        document.getElementById("backButton")
+            .classList.add("active");
+
+        document.getElementById("frontButton")
+            .classList.remove("active");
+
+    }
+
+
+    /* ================= FECHAR ================= */
+
+    function closeProduct() {
+
+        document.getElementById("productModal")
+            .classList.remove("active");
+
+        document.body.style.overflow = "auto";
+
+    }
+
+
+    /* ================= ESC ================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+                closeProduct();
+            }
+
+        }
     );
-
-    if (existing) {
-        existing.quantity += quantity;
-    } else {
-        cart.push({
-            name: currentProduct.name,
-            price: currentProduct.price,
-            image: currentProduct.image,
-            size: selectedSize,
-            quantity: quantity
-        });
-    }
-
-    updateCart();
-
-    closeProduct();
-
-    alert("Produto adicionado ao carrinho.");
-}
-
-function updateCart() {
-    const totalItems = cart.reduce(
-        (total, item) => total + item.quantity,
-        0
-    );
-
-    document.querySelector(".cart-number").textContent = totalItems;
-}
-
-function openCart() {
-    const cartPage = document.getElementById("cartPage");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-
-    cartItems.innerHTML = "";
-
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                SEU CARRINHO ESTÁ VAZIO.
-            </div>
-        `;
-
-        cartTotal.textContent = "R$ 0,00";
-        cartPage.classList.add("open");
-        return;
-    }
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-
-        cartItems.innerHTML += `
-            <div class="cart-item">
-
-                <img src="${item.image}" alt="${item.name}">
-
-                <div class="cart-item-info">
-                    <strong>${item.name}</strong>
-                    <span>Tamanho: ${item.size}</span>
-                    <span>Quantidade: ${item.quantity}</span>
-                    <span>R$ ${(item.price * item.quantity)
-                        .toFixed(2)
-                        .replace(".", ",")}</span>
-                </div>
-
-                <button
-                    class="remove-cart"
-                    onclick="removeFromCart(${index})"
-                >
-                    ×
-                </button>
-
-            </div>
-        `;
-    });
-
-    cartTotal.textContent =
-        "R$ " + total.toFixed(2).replace(".", ",");
-
-    cartPage.classList.add("open");
-}
-
-function closeCart() {
-    document.getElementById("cartPage").classList.remove("open");
-}
-
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
-    openCart();
-}
-
-function toggleSearch() {
-    const panel = document.getElementById("searchPanel");
-    panel.classList.toggle("open");
-
-    if (panel.classList.contains("open")) {
-        setTimeout(() => document.getElementById("searchInput").focus(), 200);
-    }
-}
-
-function filterProducts() {
-    const query = document.getElementById("searchInput").value.toLowerCase();
-
-    document.querySelectorAll(".product").forEach(product => {
-        const name = product.querySelector(".product-name").textContent.toLowerCase();
-        product.style.display = name.includes(query) ? "" : "none";
-    });
-}
-
-function toggleFilters() {
-    document.getElementById("filterDrawer").classList.toggle("open");
-}
-
-function showAllProducts() {
-    document.querySelectorAll(".product").forEach(product => {
-        product.style.display = "";
-    });
-    toggleFilters();
-}
-
-function filterByPrice() {
-    document.querySelectorAll(".product").forEach(product => {
-        product.style.display = "";
-    });
-    toggleFilters();
-}
-
-function sortProducts() {
-    const grid = document.querySelector(".products");
-    const cards = Array.from(grid.querySelectorAll(".product"));
-
-    cards.reverse().forEach(card => grid.appendChild(card));
-}
 
 </script>
 
-
-
-<!-- ================= PRODUCT PAGE ================= -->
-
-<div id="productPage" class="product-page">
-
-    <button class="close-product" onclick="closeProduct()">×</button>
-
-    <div class="product-page-content">
-
-        <div class="product-page-image">
-            <img id="productPageImage" src="" alt="">
-        </div>
-
-        <div class="product-page-info">
-
-            <div class="product-page-tag">
-                VICO.ARCH
-            </div>
-
-            <h1 id="productPageName">
-                THE TRUTH HURTS TEE
-            </h1>
-
-            <div id="productPagePrice" class="product-page-price">
-                R$ 129,00
-            </div>
-
-            <p id="productPageDescription" class="product-page-description">
-                The truth hurts, but lies destroy.
-            </p>
-
-            <div class="product-option">
-
-                <span>TAMANHO</span>
-
-                <div class="sizes">
-
-                    <button class="size-button"
-                        onclick="selectSize('P', this)">P</button>
-
-                    <button class="size-button"
-                        onclick="selectSize('M', this)">M</button>
-
-                    <button class="size-button"
-                        onclick="selectSize('G', this)">G</button>
-
-                    <button class="size-button"
-                        onclick="selectSize('GG', this)">GG</button>
-
-                </div>
-
-            </div>
-
-            <div class="product-option">
-
-                <span>QUANTIDADE</span>
-
-                <div class="quantity">
-
-                    <button onclick="changeQuantity(-1)">−</button>
-
-                    <span id="quantity">1</span>
-
-                    <button onclick="changeQuantity(1)">+</button>
-
-                </div>
-
-            </div>
-
-            <button class="add-cart" onclick="addToCart()">
-                ADICIONAR AO CARRINHO
-            </button>
-
-            <button class="back-shop" onclick="closeProduct()">
-                ← VOLTAR PARA A LOJA
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ================= CART ================= -->
-
-<div id="cartPage" class="cart-page">
-
-    <button class="close-product" onclick="closeCart()">×</button>
-
-    <div class="cart-content">
-
-        <div class="product-page-tag">
-            VICO.ARCH
-        </div>
-
-        <h1>SEU CARRINHO</h1>
-
-        <div id="cartItems"></div>
-
-        <div class="cart-summary">
-
-            <span>TOTAL</span>
-
-            <strong id="cartTotal">
-                R$ 0,00
-            </strong>
-
-        </div>
-
-        <button class="add-cart" onclick="alert('Checkout será adicionado na próxima etapa.')">
-            FINALIZAR COMPRA
-        </button>
-
-        <button class="back-shop" onclick="closeCart()">
-            ← CONTINUAR COMPRANDO
-        </button>
-
-    </div>
-
-</div>
-
 </body>
-
 </html>
