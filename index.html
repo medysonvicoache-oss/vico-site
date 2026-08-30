@@ -1,469 +1,1598 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VICO — Official Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif}
-button,input{font:inherit}
-a{color:inherit;text-decoration:none}
+    <title>VICO — Shop</title>
 
-/* TOP BAR */
-.topbar{
-    background:#111;color:#fff;text-align:center;
-    height:34px;display:flex;align-items:center;justify-content:center;
-    font-size:9px;letter-spacing:1.7px;font-weight:bold
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #070707;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 126px;
+            background: #fff;
+            color: #111;
+            border-bottom: 1px solid #e5e5e5;
+            z-index: 1000;
+        }
+
+        .logo {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 43px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            color: #111;
+            line-height: 1;
+        }
+
+        nav {
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 38px;
+            font-size: 12px;
+            letter-spacing: .4px;
+        }
+
+        nav a {
+            color: #111;
+            transition: .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            opacity: .55;
+        }
+
+        .header-icons {
+            position: absolute;
+            top: 21px;
+            left: 0;
+            width: 100%;
+            padding: 0 4.5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .header-icons::before {
+            content: '⌕';
+            font-size: 32px;
+            line-height: 1;
+            transform: rotate(-20deg);
+            color: #111;
+        }
+
+        .header-icons .account-link {
+            margin-left: auto;
+        }
+
+        .icon-button {
+            border: none;
+            background: none;
+            color: #111;
+            font-size: 20px;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .header-link {
+            border: 0;
+            background: none;
+            color: #111;
+            cursor: pointer;
+            font-size: 0;
+            pointer-events: auto;
+        }
+
+        .account-link::before {
+            content: '♙';
+            font-size: 25px;
+        }
+
+        .header-icons .account-link {
+            margin-right: 20px;
+        }
+
+        .header-icons .cart {
+            margin-left: 0;
+        }
+
+        .cart {
+            position: relative;
+        }
+
+        .cart-number {
+            position: absolute;
+
+            top: -8px;
+            right: -9px;
+
+            width: 16px;
+            height: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: white;
+            color: black;
+
+            border-radius: 50%;
+
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+
+        /* ================= SHOP ================= */
+
+        main {
+            padding-top: 126px;
+        }
+
+        .shop-header {
+            padding: 90px 6% 45px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .shop-title {
+            font-size: clamp(65px, 8vw, 110px);
+
+            font-weight: 900;
+
+            letter-spacing: -6px;
+
+            line-height: .8;
+        }
+
+        .shop-description {
+            margin-top: 25px;
+
+            max-width: 310px;
+
+            font-size: 12px;
+            line-height: 1.6;
+
+            color: #888;
+
+            letter-spacing: .5px;
+        }
+
+        .shop-options {
+            display: flex;
+            gap: 35px;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+        .shop-option {
+            color: #aaa;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid transparent;
+
+            padding-bottom: 6px;
+        }
+
+        .shop-option:hover {
+            color: white;
+            border-color: white;
+        }
+
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            padding: 0 5.5% 90px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .product {
+            background: #0c0c0c;
+
+            border: 1px solid #202020;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .product:hover {
+            border-color: #3a3a3a;
+            transform: translateY(-3px);
+        }
+
+        .product-image {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 1.35;
+
+            background: #111;
+
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform .6s ease;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.025);
+        }
+
+        .tag {
+            position: absolute;
+
+            top: 18px;
+            left: 18px;
+
+            padding: 8px 11px;
+
+            border: 1px solid white;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            font-weight: bold;
+
+            z-index: 2;
+        }
+
+        .product-info {
+            min-height: 95px;
+
+            padding: 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: .7px;
+        }
+
+        .product-price {
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            color: #999;
+        }
+
+        .product-arrow {
+            font-size: 27px;
+
+            font-weight: 200;
+
+            transition: .3s;
+        }
+
+        .product:hover .product-arrow {
+            transform: translateX(7px);
+        }
+
+
+        /* ================= INFORMATION ================= */
+
+        .information {
+            border-top: 1px solid #222;
+
+            border-bottom: 1px solid #222;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            padding: 42px 5.5%;
+        }
+
+        .info {
+            padding: 0 30px;
+
+            border-right: 1px solid #252525;
+        }
+
+        .info:first-child {
+            padding-left: 0;
+        }
+
+        .info:last-child {
+            border-right: none;
+        }
+
+        .info-icon {
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        .info-title {
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+        .info-text {
+            color: #666;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 70px 5.5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 70px;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+
+            font-weight: 900;
+
+            letter-spacing: -2px;
+        }
+
+        .footer-description {
+            color: #666;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            max-width: 270px;
+
+            margin-top: 15px;
+        }
+
+        .footer-column h3 {
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 20px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: #666;
+
+            font-size: 11px;
+
+            margin-bottom: 13px;
+
+            transition: .2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #222;
+
+            padding-top: 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #444;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+            header {
+                height: 112px;
+            }
+
+            .logo {
+                top: 16px;
+                font-size: 36px;
+            }
+
+            nav {
+                gap: 18px;
+                bottom: 12px;
+                font-size: 10px;
+                white-space: nowrap;
+            }
+
+            .header-icons {
+                top: 18px;
+                padding: 0 5%;
+            }
+
+            .header-icons::before {
+                font-size: 28px;
+            }
+
+            main {
+                padding-top: 112px;
+            }
+
+
+            header {
+                height: 64px;
+
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            main {
+                padding-top: 64px;
+            }
+
+            .shop-header {
+                padding: 65px 20px 35px;
+
+                display: block;
+            }
+
+            .shop-title {
+                font-size: 70px;
+
+                letter-spacing: -5px;
+            }
+
+            .shop-description {
+                margin-top: 22px;
+            }
+
+            .shop-options {
+                margin-top: 30px;
+
+                gap: 22px;
+            }
+
+            .products {
+                padding: 0 15px 60px;
+
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+            .product-image {
+                aspect-ratio: 1.15;
+            }
+
+            .product-info {
+                padding: 18px;
+            }
+
+            .information {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 30px;
+
+                padding: 35px 20px;
+            }
+
+            .info {
+                padding: 0;
+
+                border: none;
+            }
+
+            footer {
+                padding: 50px 20px 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .copyright {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+        }
+
+    
+/* ================= PRODUCT PAGE ================= */
+
+.product-page,
+.cart-page {
+    position: fixed;
+    inset: 0;
+    background: #070707;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: .35s ease;
+    overflow-y: auto;
 }
 
-/* HEADER */
-header{
-    height:82px;border-bottom:1px solid #ddd;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 5%;position:sticky;top:0;background:#fff;z-index:50
-}
-.logo{font-size:31px;font-weight:900;letter-spacing:-2px}
-.nav{display:flex;gap:32px;font-size:10px;font-weight:bold;letter-spacing:1.3px}
-.nav a:hover{opacity:.55}
-.header-actions{display:flex;align-items:center;gap:18px}
-.search{
-    width:180px;height:36px;border:1px solid #ccc;
-    padding:0 12px;font-size:10px;outline:none
-}
-.search:focus{border-color:#111}
-.icon-btn{
-    border:0;background:none;cursor:pointer;font-size:11px;
-    font-weight:bold;letter-spacing:1px
-}
-.cart-btn{position:relative}
-.cart-count{
-    position:absolute;right:-10px;top:-12px;
-    min-width:17px;height:17px;border-radius:50%;
-    background:#111;color:#fff;font-size:8px;
-    display:flex;align-items:center;justify-content:center
+.product-page.open,
+.cart-page.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-/* HERO */
-.hero{
-    min-height:650px;background:#111;color:#fff;
-    display:flex;align-items:flex-end;padding:55px 6%;
-    position:relative;overflow:hidden
-}
-.hero:before{
-    content:"VICO";position:absolute;right:-30px;top:50%;
-    transform:translateY(-50%);font-size:clamp(180px,28vw,430px);
-    font-weight:900;letter-spacing:-25px;color:#181818
-}
-.hero-content{position:relative;z-index:2;max-width:570px}
-.hero-kicker{font-size:10px;letter-spacing:3px;margin-bottom:20px;color:#aaa}
-.hero h1{font-size:clamp(45px,7vw,90px);line-height:.88;letter-spacing:-5px;margin-bottom:28px}
-.hero p{font-size:12px;line-height:1.7;color:#aaa;max-width:390px;margin-bottom:30px}
-.hero-btn{
-    display:inline-flex;padding:16px 28px;background:#fff;color:#111;
-    font-size:10px;font-weight:bold;letter-spacing:1.5px
+.close-product {
+    position: fixed;
+    top: 25px;
+    right: 35px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #333;
+    background: #0c0c0c;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10;
 }
 
-/* SECTION */
-.section{padding:75px 6%}
-.section-head{
-    display:flex;align-items:flex-end;justify-content:space-between;
-    margin-bottom:30px
+.product-page-content {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 70px;
+    padding: 100px 7%;
+    align-items: center;
 }
-.section-title{font-size:25px;letter-spacing:-1px}
-.section-link{font-size:10px;letter-spacing:1px;font-weight:bold}
 
-/* PRODUCTS */
-.products{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px
+.product-page-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #111;
+    overflow: hidden;
 }
-.product{cursor:pointer}
-.product-image{
-    position:relative;background:#f4f4f4;aspect-ratio:1/1;
-    overflow:hidden;display:flex;align-items:center;justify-content:center
-}
-.product-image img{
-    width:100%;height:100%;object-fit:contain;display:block;
-    transition:transform .45s ease
-}
-.product:hover .product-image img{transform:scale(1.025)}
-.tag{
-    position:absolute;top:14px;left:14px;background:#111;color:#fff;
-    padding:8px 11px;font-size:8px;letter-spacing:1.5px;z-index:2
-}
-.product-info{padding:17px 0;display:flex;justify-content:space-between;gap:15px}
-.product-name{font-size:11px;font-weight:bold;letter-spacing:.8px}
-.product-price{font-size:11px;color:#666;margin-top:7px}
-.product-arrow{font-size:20px}
 
-/* BRAND STRIP */
-.brand-strip{
-    background:#111;color:#fff;padding:80px 6%;
-    display:grid;grid-template-columns:1fr 1fr;gap:50px
+.product-page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-.brand-strip h2{font-size:clamp(35px,5vw,70px);letter-spacing:-4px;line-height:.9}
-.brand-strip p{max-width:420px;color:#aaa;font-size:12px;line-height:1.8;align-self:end}
 
-/* PRODUCT MODAL */
-.modal{
-    display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);
-    z-index:100;overflow:auto;padding:35px
+.product-page-info {
+    max-width: 500px;
 }
-.modal.active{display:block}
-.modal-box{
-    max-width:1180px;min-height:calc(100vh - 70px);margin:auto;
-    background:#fff;position:relative;padding:45px
-}
-.close{
-    position:absolute;right:24px;top:18px;border:0;background:none;
-    font-size:30px;cursor:pointer
-}
-.product-page{
-    display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.65fr);
-    gap:60px
-}
-.gallery-main{
-    height:680px;background:#f4f4f4;
-    display:flex;align-items:center;justify-content:center
-}
-.gallery-main img{width:100%;height:100%;object-fit:contain}
-.view-buttons{display:flex;gap:8px;margin-top:10px}
-.view-buttons button{
-    flex:1;height:45px;background:#fff;border:1px solid #ccc;
-    cursor:pointer;font-size:9px;font-weight:bold;letter-spacing:1px
-}
-.view-buttons button.active{background:#111;color:#fff;border-color:#111}
-.details{padding-top:35px}
-.details h2{font-size:25px;letter-spacing:-1px;margin-bottom:12px}
-.details-price{font-size:13px;color:#666;margin-bottom:45px}
-.label{font-size:9px;font-weight:bold;letter-spacing:1.5px;margin-bottom:12px}
-.sizes{display:flex;gap:7px;margin-bottom:35px}
-.size{
-    width:52px;height:45px;background:#fff;border:1px solid #ccc;
-    cursor:pointer;font-size:10px
-}
-.size.selected{background:#111;color:#fff;border-color:#111}
-.quantity{
-    display:flex;width:130px;height:42px;border:1px solid #ccc;
-    margin-bottom:20px
-}
-.quantity button{width:42px;border:0;background:#fff;cursor:pointer}
-.quantity span{flex:1;display:flex;align-items:center;justify-content:center;font-size:11px}
-.buy,.add-cart{
-    width:100%;height:52px;cursor:pointer;
-    font-size:9px;font-weight:bold;letter-spacing:1.5px
-}
-.buy{background:#111;color:#fff;border:1px solid #111;margin-bottom:8px}
-.add-cart{background:#fff;color:#111;border:1px solid #111}
-.message{font-size:10px;color:#555;margin-top:14px;min-height:15px}
 
-/* CART */
-.cart-panel{
-    position:fixed;right:0;top:0;width:min(430px,100%);
-    height:100vh;background:#fff;z-index:200;
-    transform:translateX(100%);transition:.3s;padding:30px;
-    box-shadow:-10px 0 30px rgba(0,0,0,.12);overflow:auto
+.product-page-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #777;
+    margin-bottom: 20px;
 }
-.cart-panel.active{transform:translateX(0)}
-.cart-head{display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding-bottom:20px}
-.cart-head h3{font-size:12px;letter-spacing:1.5px}
-.cart-close{border:0;background:none;font-size:25px;cursor:pointer}
-.cart-items{padding:10px 0}
-.cart-item{
-    display:flex;justify-content:space-between;gap:15px;
-    padding:18px 0;border-bottom:1px solid #eee
-}
-.cart-name{font-size:10px;font-weight:bold}
-.cart-meta{font-size:9px;color:#777;line-height:1.7;margin-top:6px}
-.remove{border:0;background:none;font-size:8px;text-decoration:underline;cursor:pointer}
-.cart-total{
-    display:flex;justify-content:space-between;
-    font-size:12px;font-weight:bold;padding:22px 0
-}
-.checkout{
-    width:100%;height:52px;border:0;background:#111;color:#fff;
-    font-size:9px;font-weight:bold;letter-spacing:1.5px;cursor:pointer
-}
-.empty{font-size:10px;color:#888;padding:25px 0}
 
-/* FOOTER */
-footer{background:#111;color:#fff;padding:60px 6% 30px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px}
-.footer-logo{font-size:45px;font-weight:900;letter-spacing:-4px}
-footer h4{font-size:9px;letter-spacing:1.5px;margin-bottom:18px}
-footer a,footer p{display:block;color:#888;font-size:10px;line-height:2.2}
-.copyright{border-top:1px solid #333;margin-top:50px;padding-top:20px;color:#555;font-size:8px;letter-spacing:1px}
+.product-page-info h1,
+.cart-content h1 {
+    font-size: clamp(35px, 5vw, 65px);
+    line-height: .9;
+    letter-spacing: -3px;
+    margin-bottom: 25px;
+}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-    header{height:auto;min-height:70px;flex-wrap:wrap;padding:15px 20px;gap:15px}
-    .nav{order:3;width:100%;overflow:auto;gap:20px;padding-bottom:3px}
-    .search{width:120px}
-    .hero{min-height:570px;padding:40px 20px}
-    .section{padding:55px 20px}
-    .products{grid-template-columns:1fr}
-    .brand-strip{grid-template-columns:1fr;padding:60px 20px}
-    .modal{padding:10px}
-    .modal-box{padding:25px 18px}
-    .product-page{grid-template-columns:1fr;gap:25px}
-    .gallery-main{height:500px}
-    .details{padding-top:0}
-    .footer-grid{grid-template-columns:1fr 1fr}
+.product-page-price {
+    font-size: 17px;
+    margin-bottom: 35px;
 }
-@media(max-width:500px){
-    .header-actions{gap:10px}
-    .search{display:none}
-    .logo{font-size:27px}
-    .hero h1{letter-spacing:-3px}
-    .gallery-main{height:420px}
-    .footer-grid{grid-template-columns:1fr}
+
+.product-page-description {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.7;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 25px 0;
+    margin-bottom: 30px;
 }
+
+.product-option {
+    margin-bottom: 28px;
+}
+
+.product-option > span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 13px;
+    color: #888;
+}
+
+.sizes {
+    display: flex;
+    gap: 8px;
+}
+
+.size-button {
+    width: 55px;
+    height: 50px;
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.size-button:hover,
+.size-button.selected {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    width: 145px;
+    height: 50px;
+    border: 1px solid #333;
+}
+
+.quantity button {
+    width: 45px;
+    height: 100%;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.quantity span {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+}
+
+.add-cart {
+    width: 100%;
+    height: 58px;
+    background: white;
+    color: black;
+    border: none;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.add-cart:hover {
+    background: #ddd;
+}
+
+.back-shop {
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    background: transparent;
+    color: #777;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.back-shop:hover {
+    color: white;
+}
+
+/* ================= CART ================= */
+
+.cart-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 110px 30px 70px;
+}
+
+.cart-content h1 {
+    margin-bottom: 45px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 20px 0;
+    border-top: 1px solid #222;
+}
+
+.cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    background: #111;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+}
+
+.cart-item-info strong {
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+
+.cart-item-info span {
+    color: #777;
+    font-size: 11px;
+}
+
+.remove-cart {
+    background: transparent;
+    border: none;
+    color: #777;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.remove-cart:hover {
+    color: white;
+}
+
+.empty-cart {
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 40px 0;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #222;
+    margin-top: 35px;
+    padding: 25px 0;
+}
+
+.cart-summary span {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.cart-summary strong {
+    font-size: 18px;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .product-page-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 80px 20px 40px;
+        align-items: start;
+    }
+
+    .product-page-image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .product-page-info h1,
+    .cart-content h1 {
+        font-size: 42px;
+    }
+
+    .close-product {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .cart-content {
+        padding: 85px 20px 50px;
+    }
+
+    .cart-item {
+        gap: 15px;
+    }
+
+    .cart-item img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+
+/* ================= BUSSFLY-INSPIRED STORE UI ================= */
+
+.announcement-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 31px;
+    background: #fff;
+    color: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    z-index: 1100;
+}
+
+.header-link {
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.header-link:hover {
+    color: #fff;
+}
+
+.search-panel {
+    position: fixed;
+    top: 103px;
+    left: 0;
+    width: 100%;
+    background: rgba(7,7,7,.98);
+    border-bottom: 1px solid #222;
+    z-index: 1050;
+    transform: translateY(-110%);
+    transition: .3s ease;
+}
+
+.search-panel.open {
+    transform: translateY(0);
+}
+
+.search-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px 5.5%;
+    display: flex;
+    gap: 15px;
+}
+
+.search-inner input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #444;
+    outline: none;
+    color: #fff;
+    padding: 12px 0;
+    font-size: 18px;
+}
+
+.search-inner button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.shop-tools {
+    display: flex;
+    gap: 14px;
+}
+
+.shop-option {
+    background: transparent;
+    border: 1px solid #292929;
+    color: #aaa;
+    padding: 12px 15px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.shop-option:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+.shop-option span {
+    color: #fff;
+}
+
+.shipping-tag {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    background: #fff;
+    color: #000;
+    padding: 7px 9px;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.filter-drawer {
+    position: fixed;
+    top: 103px;
+    right: 0;
+    width: min(390px, 100%);
+    height: calc(100vh - 103px);
+    background: #0b0b0b;
+    border-left: 1px solid #292929;
+    z-index: 1200;
+    transform: translateX(100%);
+    transition: .3s ease;
+}
+
+.filter-drawer.open {
+    transform: translateX(0);
+}
+
+.filter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-bottom: 1px solid #222;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.filter-head button {
+    background: none;
+    border: 0;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.filter-body {
+    padding: 25px;
+    display: grid;
+    gap: 10px;
+}
+
+.filter-body button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.filter-body button:hover {
+    background: #fff;
+    color: #000;
+}
+
+@media (max-width: 800px) {
+    .announcement-bar {
+        gap: 15px;
+        font-size: 6px;
+        padding: 0 8px;
+    }
+
+    header {
+        top: 31px;
+    }
+
+    main {
+        padding-top: 103px;
+    }
+
+    .header-link {
+        display: none;
+    }
+
+    .shop-tools {
+        margin-top: 28px;
+    }
+
+    .shop-option {
+        font-size: 8px;
+        padding: 10px;
+    }
+
+    .search-panel,
+    .filter-drawer {
+        top: 103px;
+    }
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div class="topbar">FRETE GRÁTIS — CONSULTE AS CONDIÇÕES</div>
+<div class="announcement-bar">
+    <div>PARCELE EM ATÉ 3X SEM JUROS</div>
+    <div>FRETE GRÁTIS A PARTIR DE R$399</div>
+    <div>5% OFF NO PIX</div>
+</div>
+
+
+<!-- ================= HEADER ================= -->
 
 <header>
-    <a class="logo" href="#">vico</a>
 
-    <nav class="nav">
-        <a href="#home">HOME</a>
-        <a href="#shop">SHOP</a>
-        <a href="#new">NEW ARRIVALS</a>
-        <a href="#about">SOBRE</a>
+    <a href="index.html" class="logo">
+        VICO
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            HOME
+        </a>
+
+        <a href="#" class="active">
+            SHOP
+        </a>
+
+        <a href="#">
+            COLEÇÃO
+        </a>
+
+        <a href="#">
+            SOBRE
+        </a>
+
     </nav>
 
-    <div class="header-actions">
-        <input class="search" id="searchInput" placeholder="BUSCAR..." oninput="searchProducts()">
-        <button class="icon-btn cart-btn" onclick="openCart()">
-            CARRINHO <span class="cart-count" id="cartCount">0</span>
+
+    <div class="header-icons">
+
+        <button class="header-link" onclick="toggleSearch()" aria-label="Buscar">
+            BUSCAR
         </button>
+
+        <button class="header-link account-link" aria-label="Conta">
+            CONTA
+        </button>
+
+        <button class="icon-button cart" onclick="openCart()" aria-label="Carrinho">
+            🛒
+            <span class="cart-number">0</span>
+        </button>
+
     </div>
+
 </header>
 
-<section class="hero" id="home">
-    <div class="hero-content">
-        <div class="hero-kicker">VICO.ARCH — 001</div>
-        <h1>WEAR<br>YOUR<br>VISION.</h1>
-        <p>
-            Uma nova perspectiva sobre o que você veste.
-            Design, identidade e atitude em cada peça.
+<div id="searchPanel" class="search-panel">
+    <div class="search-inner">
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Buscar produto..."
+            oninput="filterProducts()"
+        >
+        <button onclick="toggleSearch()">×</button>
+    </div>
+</div>
+
+
+
+
+<main>
+
+
+<!-- ================= SHOP HEADER ================= -->
+
+<section class="shop-header">
+
+    <div>
+
+        <h1 class="shop-title">
+            SHOP
+        </h1>
+
+        <p class="shop-description">
+            PEÇAS FEITAS PARA QUEM
+            NÃO TEM MEDO DE ENXERGAR
+            ALÉM DO ÓBVIO.
         </p>
-        <a href="#shop" class="hero-btn">VER COLEÇÃO</a>
+
     </div>
+
+
+    <div class="shop-tools">
+
+        <button class="shop-option" onclick="toggleFilters()">
+            FILTRAR <span>↓</span>
+        </button>
+
+        <button class="shop-option" onclick="sortProducts()">
+            ORDENAR: MAIS RECENTES <span>↓</span>
+        </button>
+
+    </div>
+
 </section>
 
-<section class="section" id="shop">
-    <div class="section-head">
-        <h2 class="section-title" id="new">NEW ARRIVALS</h2>
-        <a class="section-link" href="#shop">VER TODOS →</a>
-    </div>
 
-    <div class="products" id="products">
 
-        <article class="product" data-name="THE TRUTH HURTS TEE" onclick="openProduct('truth')">
-            <div class="product-image">
-                <span class="tag">NOVO</span>
-                <img src="assets/the-truth-hurts-front.png" alt="The Truth Hurts Tee">
-            </div>
-            <div class="product-info">
-                <div>
-                    <div class="product-name">THE TRUTH HURTS TEE</div>
-                    <div class="product-price">R$ 129,00</div>
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products">
+
+
+    <!-- THE TRUTH HURTS -->
+
+    <article class="product" onclick="openProduct()">
+
+        <div class="product-image">
+
+            <span class="tag">NOVO</span><span class="shipping-tag">ENVIO IMEDIATO</span>
+
+            <img
+                src="the-truth-hurts.png"
+                alt="The Truth Hurts Tee"
+            >
+
+        </div>
+
+
+        <div class="product-info">
+
+            <div>
+
+                <div class="product-name">
+                    THE TRUTH HURTS TEE
                 </div>
-                <div class="product-arrow">→</div>
+
+                <div class="product-price">
+                    R$ 129,00
+                </div>
+
             </div>
-        </article>
+
+
+            <div class="product-arrow">
+                →
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- KYAN -->
+
+    <article class="product" onclick="openKyan()">
+
+        <div class="product-image">
+
+            <span class="tag">NOVO</span><span class="shipping-tag">ENVIO IMEDIATO</span>
+
+            <img
+                src="kyan.png"
+                alt="Kyan Tee"
+            >
+
+        </div>
+
+
+        <div class="product-info">
+
+            <div>
+
+                <div class="product-name">
+                    KYAN TEE
+                </div>
+
+                <div class="product-price">
+                    R$ 129,00
+                </div>
+
+            </div>
+
+
+            <div class="product-arrow">
+                →
+            </div>
+
+        </div>
+
+    </article>
+
+
+</section>
+
+
+
+<!-- ================= INFORMATION ================= -->
+
+<section class="information">
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            ◇
+        </div>
+
+        <div class="info-title">
+            ENVIO PARA TODO O BRASIL
+        </div>
+
+        <div class="info-text">
+            Receba sua peça onde estiver.
+        </div>
 
     </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            ♢
+        </div>
+
+        <div class="info-title">
+            PAGAMENTO SEGURO
+        </div>
+
+        <div class="info-text">
+            Compra segura e protegida.
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            □
+        </div>
+
+        <div class="info-title">
+            TROCAS E DEVOLUÇÕES
+        </div>
+
+        <div class="info-text">
+            Facilidade caso precise trocar.
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            ☆
+        </div>
+
+        <div class="info-title">
+            PRODUÇÃO LIMITADA
+        </div>
+
+        <div class="info-text">
+            Peças produzidas em quantidade limitada.
+        </div>
+
+    </div>
+
+
 </section>
 
-<section class="brand-strip" id="about">
-    <h2>BUILT FOR<br>THE ONES<br>WHO SEE.</h2>
-    <p>
-        VICO nasce da ideia de transformar referências,
-        pensamentos e experiências em peças que carregam
-        significado. Não é apenas roupa. É uma forma de expressão.
-    </p>
-</section>
+
+
+<div id="filterDrawer" class="filter-drawer">
+    <div class="filter-head">
+        <span>FILTROS</span>
+        <button onclick="toggleFilters()">×</button>
+    </div>
+    <div class="filter-body">
+        <button onclick="showAllProducts()">TODOS</button>
+        <button onclick="filterByPrice()">ATÉ R$129</button>
+    </div>
+</div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
-    <div class="footer-grid">
-        <div>
-            <div class="footer-logo">vico</div>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                VICO
+            </div>
+
+            <p class="footer-description">
+                VICO.ARCH — peças para quem
+                escreve a própria história.
+            </p>
+
         </div>
-        <div>
-            <h4>NAVEGAÇÃO</h4>
-            <a href="#home">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#new">New Arrivals</a>
-            <a href="#about">Sobre</a>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SHOP
+            </h3>
+
+            <a href="#">
+                CAMISETAS
+            </a>
+
+            <a href="#">
+                COLEÇÕES
+            </a>
+
+            <a href="#">
+                NOVOS DROPS
+            </a>
+
         </div>
-        <div>
-            <h4>ATENDIMENTO</h4>
-            <p>Instagram</p>
-            <p>WhatsApp</p>
-            <p>Trocas e devoluções</p>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SUPORTE
+            </h3>
+
+            <a href="#">
+                CONTATO
+            </a>
+
+            <a href="#">
+                TROCAS
+            </a>
+
+            <a href="#">
+                ENVIO
+            </a>
+
+            <a href="#">
+                FAQ
+            </a>
+
         </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                SOCIAL
+            </h3>
+
+            <a href="#">
+                INSTAGRAM
+            </a>
+
+            <a href="#">
+                TIKTOK
+            </a>
+
+        </div>
+
+
     </div>
-    <div class="copyright">© 2026 VICO.ARCH — TODOS OS DIREITOS RESERVADOS.</div>
+
+
+    <div class="copyright">
+
+        <span>
+            © 2026 VICO.ARCH
+        </span>
+
+        <span>
+            ALL RIGHTS RESERVED.
+        </span>
+
+    </div>
+
+
 </footer>
 
-<!-- PRODUCT MODAL -->
-<div class="modal" id="modal" onclick="closeOutside(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <button class="close" onclick="closeProduct()">×</button>
 
-        <div class="product-page">
-            <div class="gallery">
-                <div class="gallery-main">
-                    <img id="productImage" src="" alt="Produto">
-                </div>
-
-                <div class="view-buttons">
-                    <button id="frontButton" class="active" onclick="showSide('front')">FRENTE</button>
-                    <button id="backButton" onclick="showSide('back')">VERSO</button>
-                </div>
-            </div>
-
-            <div class="details">
-                <h2 id="productTitle">THE TRUTH HURTS TEE</h2>
-                <div class="details-price">R$ 129,00</div>
-
-                <div class="label">TAMANHO</div>
-                <div class="sizes">
-                    <button class="size" onclick="selectSize(this)">P</button>
-                    <button class="size" onclick="selectSize(this)">M</button>
-                    <button class="size" onclick="selectSize(this)">G</button>
-                    <button class="size" onclick="selectSize(this)">GG</button>
-                </div>
-
-                <div class="label">QUANTIDADE</div>
-                <div class="quantity">
-                    <button onclick="changeQuantity(-1)">−</button>
-                    <span id="quantityValue">1</span>
-                    <button onclick="changeQuantity(1)">+</button>
-                </div>
-
-                <button class="buy" onclick="buyNow()">COMPRAR AGORA</button>
-                <button class="add-cart" onclick="addCart()">ADICIONAR AO CARRINHO</button>
-
-                <div class="message" id="message"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- CART -->
-<div class="cart-panel" id="cartPanel">
-    <div class="cart-head">
-        <h3>SEU CARRINHO</h3>
-        <button class="cart-close" onclick="closeCart()">×</button>
-    </div>
-
-    <div class="cart-items" id="cartItems"></div>
-
-    <div class="cart-total">
-        <span>TOTAL</span>
-        <span id="cartTotal">R$ 0,00</span>
-    </div>
-
-    <button class="checkout" onclick="checkout()">FINALIZAR COMPRA</button>
-</div>
 
 <script>
-const products = {
-    truth: {
-        title: "THE TRUTH HURTS TEE",
-        price: 129,
-        front: "assets/the-truth-hurts-front.png",
-        back: "assets/the-truth-hurts-back.png"
-    }
-};
-
 let currentProduct = null;
 let selectedSize = null;
 let quantity = 1;
+
+const products = {
+    truth: {
+        name: "THE TRUTH HURTS TEE",
+        price: 129,
+        image: "the-truth-hurts.png",
+        description: "The truth hurts, but lies destroy."
+    },
+    kyan: {
+        name: "KYAN TEE",
+        price: 129,
+        image: "kyan.png",
+        description: "Peça exclusiva VICO.ARCH."
+    }
+};
+
 let cart = [];
 
-function openProduct(id){
-    currentProduct = products[id];
+function openProduct() {
+    currentProduct = products.truth;
+    showProduct();
+}
 
-    document.getElementById("productTitle").textContent = currentProduct.title;
-    document.getElementById("productImage").src = currentProduct.front;
+function openKyan() {
+    currentProduct = products.kyan;
+    showProduct();
+}
 
-    document.getElementById("modal").classList.add("active");
-    document.body.style.overflow = "hidden";
-
-    quantity = 1;
+function showProduct() {
     selectedSize = null;
+    quantity = 1;
 
-    document.getElementById("quantityValue").textContent = "1";
-    document.getElementById("message").textContent = "";
+    document.getElementById("productPage").classList.add("open");
+    document.getElementById("productPageImage").src = currentProduct.image;
+    document.getElementById("productPageName").textContent = currentProduct.name;
+    document.getElementById("productPagePrice").textContent =
+        "R$ " + currentProduct.price.toFixed(2).replace(".", ",");
+    document.getElementById("productPageDescription").textContent =
+        currentProduct.description;
+    document.getElementById("quantity").textContent = quantity;
 
-    document.querySelectorAll(".size").forEach(b => b.classList.remove("selected"));
-
-    document.getElementById("frontButton").classList.add("active");
-    document.getElementById("backButton").classList.remove("active");
+    document.querySelectorAll(".size-button").forEach(button => {
+        button.classList.remove("selected");
+    });
 }
 
-function closeProduct(){
-    document.getElementById("modal").classList.remove("active");
-    document.body.style.overflow = "";
+function closeProduct() {
+    document.getElementById("productPage").classList.remove("open");
 }
 
-function closeOutside(e){
-    if(e.target.id === "modal") closeProduct();
-}
+function selectSize(size, button) {
+    selectedSize = size;
 
-function showSide(side){
-    if(!currentProduct) return;
+    document.querySelectorAll(".size-button").forEach(b => {
+        b.classList.remove("selected");
+    });
 
-    const image = document.getElementById("productImage");
-
-    if(side === "front"){
-        image.src = currentProduct.front;
-        document.getElementById("frontButton").classList.add("active");
-        document.getElementById("backButton").classList.remove("active");
-    }else{
-        image.src = currentProduct.back;
-        document.getElementById("backButton").classList.add("active");
-        document.getElementById("frontButton").classList.remove("active");
-    }
-}
-
-function selectSize(button){
-    document.querySelectorAll(".size").forEach(b => b.classList.remove("selected"));
     button.classList.add("selected");
-    selectedSize = button.textContent.trim();
 }
 
-function changeQuantity(value){
-    quantity = Math.max(1, quantity + value);
-    document.getElementById("quantityValue").textContent = quantity;
+function changeQuantity(value) {
+    quantity += value;
+
+    if (quantity < 1) quantity = 1;
+
+    document.getElementById("quantity").textContent = quantity;
 }
 
-function addCart(){
-    if(!selectedSize){
+function addToCart() {
+    if (!selectedSize) {
         alert("Selecione um tamanho.");
         return;
     }
 
     const existing = cart.find(item =>
-        item.title === currentProduct.title &&
+        item.name === currentProduct.name &&
         item.size === selectedSize
     );
 
-    if(existing){
+    if (existing) {
         existing.quantity += quantity;
-    }else{
+    } else {
         cart.push({
-            title: currentProduct.title,
+            name: currentProduct.name,
             price: currentProduct.price,
+            image: currentProduct.image,
             size: selectedSize,
             quantity: quantity
         });
@@ -471,96 +1600,253 @@ function addCart(){
 
     updateCart();
 
-    document.getElementById("message").textContent =
-        "Produto adicionado ao carrinho ✓";
+    closeProduct();
+
+    alert("Produto adicionado ao carrinho.");
 }
 
-function buyNow(){
-    if(!selectedSize){
-        alert("Selecione um tamanho.");
-        return;
-    }
-
-    addCart();
-    setTimeout(() => {
-        closeProduct();
-        openCart();
-    }, 150);
-}
-
-function updateCart(){
-    const items = document.getElementById("cartItems");
-
-    const count = cart.reduce((total,item) => total + item.quantity, 0);
-    document.getElementById("cartCount").textContent = count;
-
-    if(cart.length === 0){
-        items.innerHTML = '<div class="empty">Seu carrinho está vazio.</div>';
-    }else{
-        items.innerHTML = cart.map((item,index) => `
-            <div class="cart-item">
-                <div>
-                    <div class="cart-name">${item.title}</div>
-                    <div class="cart-meta">
-                        Tamanho: ${item.size}<br>
-                        Quantidade: ${item.quantity}<br>
-                        R$ ${(item.price * item.quantity).toFixed(2).replace(".",",")}
-                    </div>
-                </div>
-                <button class="remove" onclick="removeItem(${index})">REMOVER</button>
-            </div>
-        `).join("");
-    }
-
-    const total = cart.reduce(
-        (sum,item) => sum + item.price * item.quantity, 0
+function updateCart() {
+    const totalItems = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
     );
 
-    document.getElementById("cartTotal").textContent =
-        "R$ " + total.toFixed(2).replace(".",",");
+    document.querySelector(".cart-number").textContent = totalItems;
 }
 
-function removeItem(index){
-    cart.splice(index,1);
-    updateCart();
-}
+function openCart() {
+    const cartPage = document.getElementById("cartPage");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
 
-function openCart(){
-    updateCart();
-    document.getElementById("cartPanel").classList.add("active");
-}
+    cartItems.innerHTML = "";
 
-function closeCart(){
-    document.getElementById("cartPanel").classList.remove("active");
-}
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                SEU CARRINHO ESTÁ VAZIO.
+            </div>
+        `;
 
-function checkout(){
-    if(cart.length === 0){
-        alert("Seu carrinho está vazio.");
+        cartTotal.textContent = "R$ 0,00";
+        cartPage.classList.add("open");
         return;
     }
 
-    alert("O checkout será conectado ao pagamento na próxima etapa.");
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <img src="${item.image}" alt="${item.name}">
+
+                <div class="cart-item-info">
+                    <strong>${item.name}</strong>
+                    <span>Tamanho: ${item.size}</span>
+                    <span>Quantidade: ${item.quantity}</span>
+                    <span>R$ ${(item.price * item.quantity)
+                        .toFixed(2)
+                        .replace(".", ",")}</span>
+                </div>
+
+                <button
+                    class="remove-cart"
+                    onclick="removeFromCart(${index})"
+                >
+                    ×
+                </button>
+
+            </div>
+        `;
+    });
+
+    cartTotal.textContent =
+        "R$ " + total.toFixed(2).replace(".", ",");
+
+    cartPage.classList.add("open");
 }
 
-function searchProducts(){
+function closeCart() {
+    document.getElementById("cartPage").classList.remove("open");
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+    openCart();
+}
+
+function toggleSearch() {
+    const panel = document.getElementById("searchPanel");
+    panel.classList.toggle("open");
+
+    if (panel.classList.contains("open")) {
+        setTimeout(() => document.getElementById("searchInput").focus(), 200);
+    }
+}
+
+function filterProducts() {
     const query = document.getElementById("searchInput").value.toLowerCase();
 
     document.querySelectorAll(".product").forEach(product => {
-        const name = product.dataset.name.toLowerCase();
+        const name = product.querySelector(".product-name").textContent.toLowerCase();
         product.style.display = name.includes(query) ? "" : "none";
     });
 }
 
-document.addEventListener("keydown", e => {
-    if(e.key === "Escape"){
-        closeProduct();
-        closeCart();
-    }
-});
+function toggleFilters() {
+    document.getElementById("filterDrawer").classList.toggle("open");
+}
 
-updateCart();
+function showAllProducts() {
+    document.querySelectorAll(".product").forEach(product => {
+        product.style.display = "";
+    });
+    toggleFilters();
+}
+
+function filterByPrice() {
+    document.querySelectorAll(".product").forEach(product => {
+        product.style.display = "";
+    });
+    toggleFilters();
+}
+
+function sortProducts() {
+    const grid = document.querySelector(".products");
+    const cards = Array.from(grid.querySelectorAll(".product"));
+
+    cards.reverse().forEach(card => grid.appendChild(card));
+}
+
 </script>
 
+
+
+<!-- ================= PRODUCT PAGE ================= -->
+
+<div id="productPage" class="product-page">
+
+    <button class="close-product" onclick="closeProduct()">×</button>
+
+    <div class="product-page-content">
+
+        <div class="product-page-image">
+            <img id="productPageImage" src="" alt="">
+        </div>
+
+        <div class="product-page-info">
+
+            <div class="product-page-tag">
+                VICO.ARCH
+            </div>
+
+            <h1 id="productPageName">
+                THE TRUTH HURTS TEE
+            </h1>
+
+            <div id="productPagePrice" class="product-page-price">
+                R$ 129,00
+            </div>
+
+            <p id="productPageDescription" class="product-page-description">
+                The truth hurts, but lies destroy.
+            </p>
+
+            <div class="product-option">
+
+                <span>TAMANHO</span>
+
+                <div class="sizes">
+
+                    <button class="size-button"
+                        onclick="selectSize('P', this)">P</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('M', this)">M</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('G', this)">G</button>
+
+                    <button class="size-button"
+                        onclick="selectSize('GG', this)">GG</button>
+
+                </div>
+
+            </div>
+
+            <div class="product-option">
+
+                <span>QUANTIDADE</span>
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity(-1)">−</button>
+
+                    <span id="quantity">1</span>
+
+                    <button onclick="changeQuantity(1)">+</button>
+
+                </div>
+
+            </div>
+
+            <button class="add-cart" onclick="addToCart()">
+                ADICIONAR AO CARRINHO
+            </button>
+
+            <button class="back-shop" onclick="closeProduct()">
+                ← VOLTAR PARA A LOJA
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div id="cartPage" class="cart-page">
+
+    <button class="close-product" onclick="closeCart()">×</button>
+
+    <div class="cart-content">
+
+        <div class="product-page-tag">
+            VICO.ARCH
+        </div>
+
+        <h1>SEU CARRINHO</h1>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-summary">
+
+            <span>TOTAL</span>
+
+            <strong id="cartTotal">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+        <button class="add-cart" onclick="alert('Checkout será adicionado na próxima etapa.')">
+            FINALIZAR COMPRA
+        </button>
+
+        <button class="back-shop" onclick="closeCart()">
+            ← CONTINUAR COMPRANDO
+        </button>
+
+    </div>
+
+</div>
+
 </body>
+
 </html>
